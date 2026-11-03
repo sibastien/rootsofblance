@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { trackEvent } from '@/lib/analytics';
 import { Mail, ArrowRight, Send, CheckCircle2 } from 'lucide-react';
 import { InstagramIcon, YoutubeIcon } from '@/components/SocialIcons';
@@ -46,7 +47,15 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <span className="text-3xl">🪷</span>
+              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden p-1 shadow-sm shrink-0">
+                <Image
+                  src="/images/logo.png"
+                  alt="Roots of Balance Logo"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
+                />
+              </div>
               <div>
                 <h3 className="font-serif text-2xl text-sand-50 tracking-tight">Roots of Balance</h3>
                 <p className="text-xs uppercase tracking-widest text-sage-400 font-medium">جذور التوازن • Holistic Wellness & Academy</p>

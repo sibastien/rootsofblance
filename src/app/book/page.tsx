@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { trackEvent } from '@/lib/analytics';
 import {
   Calendar,
@@ -182,8 +183,8 @@ function BookingContent() {
     return (
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="bg-sand-50 border border-sand-300 rounded-3xl p-8 sm:p-12 shadow-xl text-center space-y-6">
-          <div className="w-16 h-16 rounded-full bg-sage-100 border border-sage-300 text-sage-800 flex items-center justify-center mx-auto text-2xl">
-            🪷
+          <div className="w-16 h-16 rounded-2xl bg-white border border-sand-300 flex items-center justify-center mx-auto shadow-sm p-1.5">
+            <Image src="/images/logo.png" alt="Roots of Balance Logo" width={56} height={56} className="object-contain" />
           </div>
 
           <div className="space-y-2">

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { db } from '@/lib/db';
 import {
   GraduationCap,
@@ -96,9 +97,9 @@ export default function AcademyPage() {
           </div>
         </div>
 
-        {/* Decorative Lotus */}
-        <div className="absolute right-0 bottom-0 text-sage-900/30 text-[320px] select-none pointer-events-none translate-x-20 translate-y-20">
-          🪷
+        {/* Decorative Tree Logo Watermark */}
+        <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none select-none translate-x-12 translate-y-12 invert">
+          <Image src="/images/logo.png" alt="" width={320} height={320} className="object-contain" />
         </div>
       </section>
 

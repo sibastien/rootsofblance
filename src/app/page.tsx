@@ -32,7 +32,9 @@ export default function HomePage() {
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sage-100/80 border border-sage-200 text-sage-900 text-xs tracking-wider uppercase font-medium">
-                <span className="text-base">🪷</span>
+                <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center overflow-hidden shrink-0">
+                  <Image src="/images/logo.png" alt="Logo" width={16} height={16} className="object-contain" />
+                </div>
                 <span>Roots of Balance • جذور التوازن</span>
               </div>
 
@@ -265,9 +267,9 @@ export default function HomePage() {
       {/* 4. TRAINING ACADEMY PILLAR PREVIEW (Journey B) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-sage-900 text-sand-100 rounded-3xl p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-2xl">
-          {/* Subtle floral background emblem */}
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 text-sage-800/20 text-[260px] pointer-events-none select-none">
-            🪷
+          {/* Subtle logo background watermark */}
+          <div className="absolute top-0 right-0 -mr-12 -mt-12 opacity-10 pointer-events-none select-none invert">
+            <Image src="/images/logo.png" alt="" width={280} height={280} className="object-contain" />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
@@ -363,8 +365,10 @@ export default function HomePage() {
                 className="object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 bg-sand-50 border border-sand-300 rounded-xl p-4 shadow-lg text-center">
-              <span className="font-serif text-2xl font-normal text-sage-900 block">🪷</span>
+            <div className="absolute -bottom-4 -right-4 bg-sand-50 border border-sand-300 rounded-xl p-3 shadow-lg text-center flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center overflow-hidden p-0.5 border border-sand-200">
+                <Image src="/images/logo.png" alt="Logo" width={32} height={32} className="object-contain" />
+              </div>
               <span className="text-[11px] uppercase tracking-wider text-earth-700 font-medium">Roots of Balance</span>
             </div>
           </div>
@@ -469,7 +473,9 @@ export default function HomePage() {
       {/* 7. BOTTOM DUAL-JOURNEY INVITATION */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
         <div className="max-w-2xl mx-auto space-y-4">
-          <span className="text-2xl">🪷</span>
+          <div className="w-16 h-16 rounded-2xl bg-white border border-sand-300 flex items-center justify-center mx-auto shadow-sm p-1.5">
+            <Image src="/images/logo.png" alt="Roots of Balance Logo" width={56} height={56} className="object-contain" />
+          </div>
           <h2 className="font-serif text-3xl sm:text-4xl text-earth-900 font-normal">
             Ready to Begin Your Journey?
           </h2>

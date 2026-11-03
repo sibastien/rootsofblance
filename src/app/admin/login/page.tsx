@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Lock, User, AlertCircle, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function AdminLoginPage() {
@@ -42,7 +43,9 @@ export default function AdminLoginPage() {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-16 bg-sand-100/60">
       <div className="w-full max-w-md bg-sand-50 border border-sand-300 rounded-3xl p-8 sm:p-10 shadow-xl space-y-6">
         <div className="text-center space-y-2">
-          <span className="text-3xl">🪷</span>
+          <div className="w-16 h-16 rounded-2xl bg-white border border-sand-300 flex items-center justify-center mx-auto shadow-sm p-1.5 mb-1">
+            <Image src="/images/logo.png" alt="Roots of Balance Logo" width={56} height={56} className="object-contain" />
+          </div>
           <h1 className="font-serif text-2xl text-earth-950 font-medium">Coach Portal</h1>
           <p className="text-xs text-earth-500 font-light">
             Roots of Balance Administrative Business Console
