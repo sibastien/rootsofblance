@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
   title: 'Roots of Balance | Holistic Wellness Coach & Training Academy',
@@ -54,11 +55,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen flex flex-col bg-sand-50 text-earth-900 selection:bg-sage-200 selection:text-sage-900">
-        <AnalyticsTracker />
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <CookieConsent />
+        <LanguageProvider>
+          <AnalyticsTracker />
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <CookieConsent />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -4,11 +4,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Calendar, GraduationCap, Sparkles } from 'lucide-react';
+import { Menu, X, Calendar, GraduationCap, Sparkles, Globe } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { lang, toggleLang, t } = useLanguage();
 
   // If in admin dashboard, keep public navbar clean or hidden
   const isAdmin = pathname.startsWith('/admin');
@@ -34,11 +36,11 @@ export default function Navbar() {
   }
 
   const navLinks = [
-    { name: 'About Alia', href: '/about' },
-    { name: 'Coaching Services', href: '/coaching' },
-    { name: 'Training Academy', href: '/academy' },
-    { name: 'Blog & Insights', href: '/blog' },
-    { name: 'Contact', href: '/contact' },
+    { name: t.nav.about, href: '/about' },
+    { name: t.nav.services, href: '/coaching' },
+    { name: t.nav.academy, href: '/academy' },
+    { name: t.nav.blog, href: '/blog' },
+    { name: t.nav.contact, href: '/contact' },
   ];
 
   return (
@@ -46,9 +48,9 @@ export default function Navbar() {
       {/* Top micro-announcement banner for upcoming academy cohort */}
       <div className="bg-sage-900 text-sand-100 px-4 py-1.5 text-center text-xs tracking-wider font-light flex items-center justify-center gap-2">
         <Sparkles className="w-3.5 h-3.5 text-terracotta-300 animate-pulse" />
-        <span>Spring 2027 Holistic Coach Training Cohort Applications Now Open</span>
+        <span>{t.nav.bannerText}</span>
         <Link href="/academy" className="underline font-normal text-sand-200 hover:text-white ml-1">
-          Explore Curriculum &rarr;
+          {t.nav.bannerLink}
         </Link>
       </div>
 
@@ -77,7 +79,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-7 rtl:space-x-reverse">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
@@ -99,15 +101,25 @@ export default function Navbar() {
             })}
           </div>
 
-          {/* Dual-Journey CTA Buttons */}
-          <div className="hidden sm:flex items-center space-x-3">
+          {/* Dual-Journey CTA Buttons & Language Switcher */}
+          <div className="hidden sm:flex items-center space-x-3 rtl:space-x-reverse">
+            {/* Language Toggle Button */}
+            <button
+              onClick={toggleLang}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-2 rounded-full border border-sand-300 bg-sand-100 hover:bg-sand-200 text-earth-800 transition"
+              title={lang === 'en' ? 'التحويل إلى العربية' : 'Switch to English'}
+            >
+              <Globe className="w-3.5 h-3.5 text-sage-700" />
+              <span>{t.nav.switchLang}</span>
+            </button>
+
             {/* Journey B: Coach Academy */}
             <Link
               href="/academy"
               className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium px-4 py-2.5 rounded-full border border-sage-700/30 text-sage-800 hover:bg-sage-50 transition duration-200"
             >
               <GraduationCap className="w-3.5 h-3.5 text-sage-600" />
-              <span>Become a Coach</span>
+              <span>{t.nav.becomeCoach}</span>
             </Link>
 
             {/* Journey A: Book Session */}
@@ -116,12 +128,20 @@ export default function Navbar() {
               className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-medium px-4 py-2.5 rounded-full bg-sage-700 text-white hover:bg-sage-800 shadow-sm transition duration-200"
             >
               <Calendar className="w-3.5 h-3.5" />
-              <span>Book a Session</span>
+              <span>{t.nav.bookSession}</span>
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex lg:hidden">
+          {/* Mobile menu button & Mobile Language Switcher */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              onClick={toggleLang}
+              className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-full border border-sand-300 bg-sand-100 text-earth-800"
+            >
+              <Globe className="w-3.5 h-3.5 text-sage-700" />
+              <span>{t.nav.switchLang}</span>
+            </button>
+
             <button
               onClick={() => setIsOpen(!isOpen)}
               type="button"
@@ -154,7 +174,7 @@ export default function Navbar() {
               className="w-full text-center py-3 rounded-full bg-sage-700 text-white font-medium text-sm flex items-center justify-center gap-2"
             >
               <Calendar className="w-4 h-4" />
-              Book a Personal Session
+              {t.nav.bookSession}
             </Link>
             <Link
               href="/academy"
@@ -162,7 +182,7 @@ export default function Navbar() {
               className="w-full text-center py-3 rounded-full border border-sage-700 text-sage-800 font-medium text-sm flex items-center justify-center gap-2"
             >
               <GraduationCap className="w-4 h-4" />
-              Join the Coach Academy
+              {t.nav.becomeCoach}
             </Link>
           </div>
         </div>
@@ -170,4 +190,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
