@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     'التوازن النفسي',
     'اليقظة الذهنية',
     'Mind Body Soul',
-    'Sarah T. Carr'
+    'Alia Alblooki'
   ],
-  authors: [{ name: 'Sarah T. Carr' }],
+  authors: [{ name: 'Alia Alblooki' }],
   openGraph: {
     title: 'جذور التوازن | Roots of Balance',
     description:

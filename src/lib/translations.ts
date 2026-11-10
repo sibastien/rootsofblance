@@ -132,7 +132,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   ar: {
     nav: {
-      about: 'عن سارة والفلسفة',
+      about: 'عن علياء والفلسفة',
       services: 'جلسات التوجيه',
       academy: 'أكاديمية التدريب',
       blog: 'المقالات والموارد',
@@ -158,7 +158,7 @@ export const translations: Record<Language, Translations> = {
       p1: 'غالباً ما نتعامل مع التحديات اليومية بطرق مجزأة؛ فنفصل إجهاد الجسد عن ضجيج الأفكار، أو نعزل التوتر العاطفي عن نمط التنفس والحركة. الشفاء الشمولي يدعونا إلى رؤية الصورة الكاملة: أنتِ لستِ أجزاء منفصلة، بل منظومة واحدة متكاملة تتأثر فيها مشاعركِ بصحة خلاياكِ، وتنعكس فيها طمأنينة روحكِ على توازن جهازكِ العصبي.',
       p2: 'عندما نمنح أنفسنا المساحة الكافية للإصغاء إلى الإشارات الدقيقة التي يرسلها الجسد، نبدأ بتفكيك جذور التوتر بدلاً من الاكتفاء بتهدئة الأعراض السطحية. هذا الفهم العميق هو ما يفتح باب الشفاء الأصيل والمستدام.',
       quote: '«الشفاء الشمولي لا يعني إصلاح ما كُسر، بل تذكّر ما نحن عليه في الأصل: كائنات متكاملة تبحث عن التناغم والسلام الداخلي.»',
-      quoteAuthor: 'سارة ت. كار',
+      quoteAuthor: 'علياء البلوكي',
       cta: 'اكتشفي مفهوم الشفاء الشمولي',
       interconnectedTitle: 'التكامل الحيوي',
       interconnectedDesc: 'كيف تتشابك خيوط الفكر، والمشاعر، وحيوية الجسد، وصفاء الروح لتنسج جودة حياتكِ اليومية.',
@@ -292,8 +292,8 @@ export const translations: Record<Language, Translations> = {
     },
     meetSarah: {
       badge: 'المرشدة والمؤسسة',
-      name: 'سارة ت. كار (Sarah T. Carr)',
-      title: 'ممارسة الشفاء الشمولي وبناء الوعي الذاتي',
+      name: 'علياء البلوكي (Alia Alblooki)',
+      title: 'مدربة عافية شاملة • متخصصة في التوازن النفسي وتطوير الذات',
       greeting: 'أهلاً بكِ في مساحتكِ الآمنة للشفاء واكتشاف الذات.',
       p1: 'بدأت رحلتي في عالم الشفاء الشمولي من تجربة شخصية عميقة؛ حيث اختبرت بنفسي كيف يمكن لضغوط الحياة العصرية والمعايير المجتمعية المرهقة أن تفصلنا عن أجسادنا وأرواحنا دون أن نشعر. قادني هذا البحث إلى دراسة العلاقة الوثيقة بين الجهاز العصبي، والوعي العاطفي، والممارسات التأملية العريقة.',
       p2: 'منهجي في "جذور التوازن" ليس تلقيناً للمعلومات، بل هو مرافقة واعية ودافئة. أؤمن بأن لكل إنسان حكمته الفطرية القادرة على الشفاء متى ما تهيأت له البيئة الآمنة، واستمع إلى صوته الداخلي بحب ورأفة.',
@@ -339,7 +339,7 @@ export const translations: Record<Language, Translations> = {
   },
   en: {
     nav: {
-      about: 'About Sarah & Philosophy',
+      about: 'About Alia & Philosophy',
       services: 'Coaching Pathways',
       academy: 'Training Academy',
       blog: 'Journal & Resources',
@@ -365,7 +365,7 @@ export const translations: Record<Language, Translations> = {
       p1: 'Modern life often encourages us to compartmentalize: treating mental exhaustion separately from bodily aches, or isolating emotional overwhelm from our breathing patterns and daily rhythms. Holistic healing invites us to see the whole picture: you are not separate fragments, but an integrated ecosystem where your thoughts influence your cellular vitality, and the peace of your soul steadies your nervous system.',
       p2: 'When we give ourselves the space to listen to the subtle cues our body has been whispering, we begin addressing root causes rather than continually managing surface symptoms. This profound understanding is where genuine, sustainable healing takes root.',
       quote: '“Holistic healing is not about fixing what is broken, but remembering who we truly are: integrated beings yearning for harmony and inner peace.”',
-      quoteAuthor: 'Sarah T. Carr',
+      quoteAuthor: 'Alia Alblooki',
       cta: 'Explore the Concept of Holistic Healing',
       interconnectedTitle: 'The Living Interconnection',
       interconnectedDesc: 'How thoughts, emotions, physical vitality, and spiritual clarity weave the fabric of your daily experience.',
@@ -499,8 +499,8 @@ export const translations: Record<Language, Translations> = {
     },
     meetSarah: {
       badge: 'Founder & Holistic Guide',
-      name: 'Sarah T. Carr',
-      title: 'Holistic Healing Practitioner & Self-Discovery Mentor',
+      name: 'Alia Alblooki',
+      title: 'Holistic Wellness Coach & Psychological Balance Specialist',
       greeting: 'Welcome to your sanctuary for healing, mindful awareness, and self-discovery.',
       p1: 'My journey into holistic wellbeing began from a deeply personal reckoning. Like so many seekers, I experienced how the relentless tempo of modern life, unspoken societal conditioning, and prolonged stress quietly dislodge us from our bodies. This realization led me to dedicate my life to the study of the nervous system, somatic integration, emotional wisdom, and contemplative wisdom traditions.',
       p2: 'My approach at Roots of Balance is not prescriptive instruction, but warm, compassionate accompaniment. I believe that every human carries an innate inner compass for healing; all that is needed is an unhurried, safe environment where one can finally hear the gentle whisper of truth.',

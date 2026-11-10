@@ -443,17 +443,17 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
 
 
       {/* =========================================================================
-          SECTION 6 — MEET SARAH (تعرّفي على سارة ت. كار)
+          SECTION 6 — MEET ALIA (تعرّفي على علياء البلوكي)
           ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Portrait of Sarah T. Carr */}
+          {/* Portrait of Alia Alblooki */}
           <div className="lg:col-span-5 relative">
             <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border-4 border-sand-200 relative bg-sand-100">
               <Image
                 src="/images/alia-alblooki.jpg"
-                alt="Sarah T. Carr - Holistic Healing Guide"
+                alt="Alia Alblooki - Holistic Healing Guide"
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
@@ -466,7 +466,7 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
               </div>
               <div className="text-left rtl:text-right">
                 <span className="text-xs uppercase tracking-wider text-earth-900 font-semibold block">Roots of Balance</span>
-                <span className="text-[10px] text-sage-700 font-light block">Sarah T. Carr • سارة ت. كار</span>
+                <span className="text-[10px] text-sage-700 font-light block">Alia Alblooki • علياء البلوكي</span>
               </div>
             </div>
           </div>
