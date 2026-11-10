@@ -23,6 +23,12 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import HeroDiorama from '@/components/HeroDiorama';
+import SiteWideWind from '@/components/SiteWideWind';
+import HolisticRootsDiorama from '@/components/HolisticRootsDiorama';
+import DimensionDioramaBox from '@/components/DimensionDioramaBox';
+import PhilosophyDiorama from '@/components/PhilosophyDiorama';
+import MeetAliaDiorama from '@/components/MeetAliaDiorama';
+import FinalInvitationDiorama from '@/components/FinalInvitationDiorama';
 import { CoachProfile, CoachingService, AcademyModule, BlogPost, Testimonial } from '@/lib/db';
 
 interface Props {
@@ -49,7 +55,9 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
     t.selfDiscovery.pillars.find((p) => p.id === activePillar) || t.selfDiscovery.pillars[0];
 
   return (
-    <div className="space-y-24 md:space-y-36 pb-24 text-earth-900">
+    <div className="space-y-24 md:space-y-36 pb-24 text-earth-900 relative">
+      {/* Sitewide Mediterranean breeze & drifting olive leaves */}
+      <SiteWideWind />
       
       {/* =========================================================================
           SECTION 1 — HERO DIORAMA: "رحلتك نحو التوازن تبدأ من الداخل"
@@ -64,33 +72,12 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
       <section id="what-is-holistic" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Visual Storytelling & Imagery */}
+          {/* Left Column: Contextual Botanical Roots Diorama */}
           <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border-4 border-white relative bg-sand-100">
-                <Image
-                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=80"
-                  alt="Holistic Healing Sanctuary"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-earth-950/60 via-transparent to-transparent" />
-                
-                {/* Floating Quote Card */}
-                <div className="absolute bottom-6 left-6 right-6 bg-[#FAF8F5]/95 backdrop-blur-md p-5 rounded-2xl border border-sand-300 shadow-soft text-left rtl:text-right">
-                  <p className="font-serif italic text-sm text-earth-900 leading-relaxed">
-                    {t.whatIsHolistic.quote}
-                  </p>
-                  <span className="block text-xs uppercase tracking-wider text-sage-800 font-semibold mt-2">
-                    — {t.whatIsHolistic.quoteAuthor}
-                  </span>
-                </div>
-              </div>
-
-              {/* Decorative botanical aura */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-sage-200/50 rounded-full blur-2xl -z-10" />
-            </div>
+            <HolisticRootsDiorama
+              quote={t.whatIsHolistic.quote}
+              quoteAuthor={t.whatIsHolistic.quoteAuthor}
+            />
           </div>
 
           {/* Right Column: Editorial Essay */}
@@ -218,6 +205,9 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
                 <span>{t.dimensions.reflectionLabel}</span>
               </div>
 
+              {/* Contextual Dimension Diorama (Reacts to selected dimension) */}
+              <DimensionDioramaBox dimensionId={selectedDimension.id} />
+
               <blockquote className="font-serif italic text-base text-earth-900 leading-relaxed">
                 &ldquo;{selectedDimension.inquiry}&rdquo;
               </blockquote>
@@ -247,7 +237,22 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
       {/* =========================================================================
           SECTION 4 — THE JOURNEY OF SELF-DISCOVERY (رحلة اكتشاف الذات)
           ========================================================================= */}
-      <section className="bg-sand-100/70 border-y border-sand-300/60 py-24">
+      <section className="bg-sand-100/70 border-y border-sand-300/60 py-24 relative overflow-hidden">
+        {/* Ancient Olive Trunk Dendrochronology (Growth Rings) & Labyrinth Motif */}
+        <div className="absolute inset-0 pointer-events-none select-none opacity-[0.055] flex items-center justify-center" aria-hidden="true">
+          <svg viewBox="0 0 1000 1000" className="w-[1200px] h-[1200px] text-earth-900" fill="none" stroke="currentColor">
+            <ellipse cx="500" cy="500" rx="60" ry="55" strokeWidth="2" />
+            <ellipse cx="500" cy="500" rx="120" ry="110" strokeWidth="2" strokeDasharray="80 8" />
+            <ellipse cx="500" cy="500" rx="190" ry="175" strokeWidth="2.5" />
+            <ellipse cx="500" cy="500" rx="270" ry="250" strokeWidth="2" strokeDasharray="120 12" />
+            <ellipse cx="500" cy="500" rx="360" ry="330" strokeWidth="3" />
+            <ellipse cx="500" cy="500" rx="460" ry="420" strokeWidth="2.5" strokeDasharray="160 14" />
+            <ellipse cx="500" cy="500" rx="570" ry="520" strokeWidth="3" />
+            <ellipse cx="500" cy="500" rx="690" ry="630" strokeWidth="3.5" />
+            <line x1="500" y1="0" x2="500" y2="1000" strokeWidth="1" strokeDasharray="10 10" />
+            <line x1="0" y1="500" x2="1000" y2="500" strokeWidth="1" strokeDasharray="10 10" />
+          </svg>
+        </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
@@ -327,6 +332,9 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
       <section id="philosophy" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
         <div className="bg-[#1C2C23] text-sand-100 rounded-3xl p-8 sm:p-14 lg:p-16 relative overflow-hidden shadow-elevated">
           
+          {/* Living Subterranean & Canopy Night Diorama */}
+          <PhilosophyDiorama />
+
           {/* Subtle Olive Tree Watermark */}
           <div className="absolute top-0 ltr:right-0 rtl:left-0 -mr-12 -mt-12 opacity-10 pointer-events-none select-none invert">
             <Image src="/images/logo.png" alt="" width={320} height={320} className="object-contain" />
@@ -405,27 +413,13 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Portrait of Alia Alblooki */}
+          {/* Left Column: Contextual Botanical Portrait Diorama */}
           <div className="lg:col-span-5 relative">
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border-4 border-sand-200 relative bg-sand-100">
-              <Image
-                src="/images/alia-alblooki.jpg"
-                alt="Alia Alblooki - Holistic Healing Guide"
-                fill
-                sizes="(max-width: 768px) 100vw, 40vw"
-                className="object-cover"
-              />
-            </div>
-            
-            <div className="absolute -bottom-4 ltr:-right-4 rtl:-left-4 bg-[#FAF8F5] border border-sand-300 rounded-2xl p-4 shadow-editorial text-center flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden p-1 border border-sand-200 shadow-sm">
-                <Image src="/images/logo.png" alt="Logo" width={40} height={40} className="object-contain" />
-              </div>
-              <div className="text-left rtl:text-right">
-                <span className="text-xs uppercase tracking-wider text-earth-900 font-semibold block">Roots of Balance</span>
-                <span className="text-[10px] text-sage-700 font-light block">Alia Alblooki • علياء البلوكي</span>
-              </div>
-            </div>
+            <MeetAliaDiorama
+              imageSrc="/images/alia-alblooki.jpg"
+              name={t.meetSarah.name}
+              title={t.meetSarah.title}
+            />
           </div>
 
           {/* Authentic Personal Story */}
@@ -604,9 +598,8 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="editorial-card rounded-3xl p-10 sm:p-16 border border-sand-300 bg-white shadow-editorial space-y-6 relative overflow-hidden">
           
-          <div className="w-12 h-12 rounded-full bg-sage-100 border border-sage-200 flex items-center justify-center mx-auto text-sage-800">
-            <Heart className="w-5 h-5 text-sage-700" />
-          </div>
+          {/* Sacred Olive Seedling Mini-Diorama at Dawn */}
+          <FinalInvitationDiorama />
 
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-tight">
             {t.finalInvitation.headline}
