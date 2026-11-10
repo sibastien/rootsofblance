@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { trackEvent } from '@/lib/analytics';
-import { Mail, ArrowRight, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, Send, CheckCircle2, Shield, Cpu, Activity, Sparkles } from 'lucide-react';
 import { InstagramIcon, YoutubeIcon } from '@/components/SocialIcons';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -25,7 +25,7 @@ export default function Footer() {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'Website Footer Newsletter' }),
+        body: JSON.stringify({ email, source: 'Futuristic Footer Newsletter' }),
       });
 
       if (!res.ok) {
@@ -43,175 +43,190 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-earth-950 text-sand-200 border-t border-earth-900 pt-16 pb-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-earth-800">
+    <footer className="relative bg-[#020507] text-sand-200 border-t border-cyber-neon/20 pt-20 pb-12 overflow-hidden">
+      {/* Background cyber ambient lines */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-cyber-neon/5 via-transparent to-transparent pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-cyber-border">
           {/* Brand Col */}
-          <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden p-1 shadow-sm shrink-0">
+          <div className="lg:col-span-2 space-y-5">
+            <div className="flex items-center gap-3.5">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyber-dark to-[#091a1d] border border-cyber-neon/40 flex items-center justify-center overflow-hidden p-2 shadow-neon-emerald">
                 <Image
                   src="/images/logo.png"
                   alt="Roots of Balance Logo"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-contain"
+                  width={52}
+                  height={52}
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,255,178,0.5)]"
                 />
               </div>
               <div>
-                <h3 className="font-serif text-2xl text-sand-50 tracking-tight">Roots of Balance</h3>
-                <p className="text-xs uppercase tracking-widest text-sage-400 font-medium">جذور التوازن • Holistic Wellness & Academy</p>
+                <h3 className="font-display text-2xl font-bold text-white tracking-wider">Roots of Balance</h3>
+                <p className="text-xs uppercase tracking-widest font-mono text-cyber-neon flex items-center gap-1.5 mt-0.5">
+                  <Activity className="w-3.5 h-3.5 animate-pulse" />
+                  <span>{lang === 'ar' ? 'جذور التوازن • نظام حيوي ذكي' : 'BIO-HARMONIC ARCHITECTURE'}</span>
+                </p>
               </div>
             </div>
-            <p className="text-sm text-sand-300 leading-relaxed max-w-sm">
+
+            <p className="text-sm text-sand-300/80 leading-relaxed max-w-sm font-light">
               {t.footer.desc}
             </p>
+
             <div className="flex items-center space-x-3 rtl:space-x-reverse pt-2">
               <a
-                href="https://instagram.com/roots__of_balance"
+                href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-earth-900 border border-earth-800 flex items-center justify-center text-sand-300 hover:text-white hover:border-sage-500 transition"
-                aria-label="Instagram @roots__of_balance"
+                className="w-10 h-10 rounded-xl bg-cyber-dark border border-cyber-border flex items-center justify-center text-sand-300 hover:text-cyber-neon hover:border-cyber-neon hover:shadow-neon-emerald transition duration-300"
+                aria-label="Instagram"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a
-                href="https://t.me/RootsOfBalance"
+                href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-earth-900 border border-earth-800 flex items-center justify-center text-sand-300 hover:text-white hover:border-sage-500 transition"
-                aria-label="Telegram Channel"
-              >
-                <Send className="w-4 h-4" />
-              </a>
-              <a
-                href="https://youtube.com/@RootsOfBalance"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-earth-900 border border-earth-800 flex items-center justify-center text-sand-300 hover:text-white hover:border-sage-500 transition"
-                aria-label="YouTube Channel"
+                className="w-10 h-10 rounded-xl bg-cyber-dark border border-cyber-border flex items-center justify-center text-sand-300 hover:text-cyber-cyan hover:border-cyber-cyan hover:shadow-neon-cyan transition duration-300"
+                aria-label="YouTube"
               >
                 <YoutubeIcon className="w-4 h-4" />
-              </a>
-              <a
-                href="mailto:rootsofbalance@outlook.com"
-                className="w-9 h-9 rounded-full bg-earth-900 border border-earth-800 flex items-center justify-center text-sand-300 hover:text-white hover:border-sage-500 transition"
-                aria-label="Email rootsofbalance@outlook.com"
-              >
-                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          {/* Journey A: Personal Coaching */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-sand-100 mb-4 font-sans">
-              {t.footer.coachingColTitle}
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h4 className="font-mono text-xs uppercase tracking-widest text-cyber-neon font-semibold flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyber-neon" />
+              <span>{t.footer.coachingColTitle}</span>
             </h4>
-            <ul className="space-y-2.5 text-sm text-sand-400">
+            <ul className="space-y-2.5 text-sm text-sand-300/80">
               <li>
-                <Link href="/coaching" className="hover:text-sand-100 transition">
-                  {lang === 'ar' ? 'الجلسات الفردية' : 'Individual Sessions'}
+                <Link href="/about" className="hover:text-cyber-neon transition flex items-center gap-1.5">
+                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                  {t.nav.about}
                 </Link>
               </li>
               <li>
-                <Link href="/coaching#stress" className="hover:text-sand-100 transition">
-                  {lang === 'ar' ? 'التوتر والجهاز العصبي' : 'Stress & Nervous System'}
+                <Link href="/coaching" className="hover:text-cyber-neon transition flex items-center gap-1.5">
+                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                  {t.nav.services}
                 </Link>
               </li>
               <li>
-                <Link href="/coaching#mindfulness" className="hover:text-sand-100 transition">
-                  {lang === 'ar' ? 'اليقظة الذهنية والاتزان' : 'Mindfulness & Alignment'}
+                <Link href="/academy" className="hover:text-cyber-neon transition flex items-center gap-1.5">
+                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                  {t.nav.academy}
                 </Link>
               </li>
               <li>
-                <Link href="/book" className="hover:text-sand-100 transition text-sage-300 font-medium flex items-center gap-1">
-                  <span>{lang === 'ar' ? 'حجز موعد' : 'Schedule Appointment'}</span> &rarr;
+                <Link href="/blog" className="hover:text-cyber-neon transition flex items-center gap-1.5">
+                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                  {t.nav.blog}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-cyber-neon transition flex items-center gap-1.5">
+                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                  {t.nav.contact}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Journey B: Coach Academy */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-sand-100 mb-4 font-sans">
-              {t.footer.academyColTitle}
+          {/* Core Tracks */}
+          <div className="space-y-4">
+            <h4 className="font-mono text-xs uppercase tracking-widest text-cyber-cyan font-semibold flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyber-cyan" />
+              <span>{t.footer.academyColTitle}</span>
             </h4>
-            <ul className="space-y-2.5 text-sm text-sand-400">
+            <ul className="space-y-2.5 text-sm text-sand-300/80">
               <li>
-                <Link href="/academy" className="hover:text-sand-100 transition">
-                  {lang === 'ar' ? 'نظرة عامة على الأكاديمية' : 'Academy Overview'}
+                <Link href="/coaching#stress" className="hover:text-cyber-cyan transition">
+                  {lang === 'ar' ? 'التحول العصبي والتوازن' : 'Nervous System Bio-Reset'}
                 </Link>
               </li>
               <li>
-                <Link href="/academy#curriculum" className="hover:text-sand-100 transition">
-                  {lang === 'ar' ? 'منهاج الـ 9 وحدات' : '9-Module Curriculum'}
+                <Link href="/coaching#burnout" className="hover:text-cyber-cyan transition">
+                  {lang === 'ar' ? 'استعادة الطاقة الخلوية' : 'Vital Energy Optimization'}
                 </Link>
               </li>
               <li>
-                <Link href="/academy#methodology" className="hover:text-sand-100 transition">
-                  {lang === 'ar' ? 'المنهجية التطبيقية' : 'Somatic Methodology'}
+                <Link href="/academy#curriculum" className="hover:text-cyber-cyan transition">
+                  {lang === 'ar' ? 'شهادة مدرب الرفاهية الشاملة' : 'Certified Bio-Wellness Mentor'}
                 </Link>
               </li>
               <li>
-                <Link href="/academy/apply" className="hover:text-sand-100 transition text-terracotta-300 font-medium flex items-center gap-1">
-                  <span>{lang === 'ar' ? 'تقديم طلب للدفعة القادمة' : 'Apply for Next Cohort'}</span> &rarr;
+                <Link href="/academy#faq" className="hover:text-cyber-cyan transition">
+                  {lang === 'ar' ? 'معايير التدريب والاعتماد' : 'Accreditation Matrix'}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Newsletter & Free Guide */}
-          <div>
-            <h4 className="text-xs font-semibold uppercase tracking-widest text-sand-100 mb-2 font-sans">
-              {t.footer.newsletterTitle}
+          {/* High-Tech Newsletter Dispatch */}
+          <div className="space-y-4">
+            <h4 className="font-mono text-xs uppercase tracking-widest text-cyber-neon font-semibold flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-cyber-neon" />
+              <span>{t.footer.newsletterTitle}</span>
             </h4>
-            <p className="text-xs text-sand-400 mb-4 leading-relaxed">
+            <p className="text-xs text-sand-300/80 leading-relaxed font-light">
               {t.footer.newsletterDesc}
             </p>
+
             {status === 'success' ? (
-              <div className="bg-sage-900/60 border border-sage-700/50 rounded-lg p-3 text-xs text-sand-100 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-sage-400 shrink-0" />
-                <span>{lang === 'ar' ? 'شكراً لكِ. دليلكِ في طريقه إلى بريدك الإلكتروني.' : 'Thank you. Your guide is on its way to your inbox.'}</span>
+              <div className="p-4 rounded-xl bg-cyber-neon/10 border border-cyber-neon/30 text-cyber-neon text-xs font-mono flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>{lang === 'ar' ? 'تم تأكيد اشتراكك بنجاح.' : 'Quantum uplink established. Check inbox.'}</span>
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
                 <div className="relative">
                   <input
                     type="email"
-                    required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={t.footer.placeholderEmail}
-                    className="w-full bg-earth-900 border border-earth-800 rounded-lg px-3.5 py-2.5 text-xs text-sand-100 placeholder-earth-500 focus:outline-none focus:border-sage-500 transition"
+                    required
+                    className="w-full pl-4 pr-10 py-2.5 text-xs rounded-xl bg-cyber-dark/80 border border-cyber-border focus:border-cyber-neon focus:ring-1 focus:ring-cyber-neon text-white placeholder-sand-500 font-mono transition"
                   />
                   <button
                     type="submit"
                     disabled={status === 'loading'}
-                    className="absolute ltr:right-1 rtl:left-1 top-1 bottom-1 px-3 bg-sage-700 hover:bg-sage-600 text-white rounded-md flex items-center justify-center transition disabled:opacity-50"
-                    aria-label="Subscribe"
+                    aria-label="Subscribe to newsletter"
+                    className="absolute right-2 top-2 p-1.5 rounded-lg bg-cyber-neon text-cyber-dark hover:scale-105 transition disabled:opacity-50"
                   >
-                    <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                    <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>
                 {status === 'error' && (
-                  <p className="text-[11px] text-terracotta-400">{errorMessage}</p>
+                  <p className="text-[11px] text-red-400 font-mono">{errorMessage}</p>
                 )}
               </form>
             )}
           </div>
         </div>
 
-        {/* Bottom Legal & Ethics Note */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-sand-400 gap-4">
-          <p className="text-center md:text-left">
-            &copy; {new Date().getFullYear()} Roots of Balance. {t.footer.copyright}
-          </p>
+        {/* Bottom Credits & System Telemetry */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-sand-400 font-mono gap-4">
+          <div className="flex items-center gap-3">
+            <span>&copy; {new Date().getFullYear()} Roots of Balance. All rights reserved.</span>
+            <span className="hidden sm:inline text-cyber-neon/30">•</span>
+            <span className="text-[10px] text-cyber-neon/70 hidden sm:inline flex items-center gap-1">
+              <span className="w-2 h-2 rounded-full bg-cyber-neon animate-pulse inline-block" />
+              STATUS: OPERATIONAL 99.98%
+            </span>
+          </div>
           <div className="flex items-center space-x-6 rtl:space-x-reverse">
-            <Link href="/about" className="hover:text-sand-200 transition">{t.footer.credentialsEthics}</Link>
-            <Link href="/contact" className="hover:text-sand-200 transition">{t.footer.contact}</Link>
-            <Link href="/admin/login" className="hover:text-sand-200 transition text-earth-500 hover:text-sand-400">
+            <Link href="/privacy" className="hover:text-cyber-neon transition">
+              {t.footer.credentialsEthics}
+            </Link>
+            <Link href="/terms" className="hover:text-cyber-neon transition">
+              {t.footer.contact}
+            </Link>
+            <Link href="/admin" className="text-sand-500 hover:text-sand-300 transition">
               {t.footer.coachLogin}
             </Link>
           </div>

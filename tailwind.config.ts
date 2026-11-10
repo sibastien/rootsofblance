@@ -9,6 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        cyber: {
+          dark: "#050B0E",
+          card: "rgba(10, 24, 28, 0.65)",
+          border: "rgba(0, 255, 178, 0.18)",
+          neon: "#00FFB2",
+          emerald: "#10B981",
+          cyan: "#00E5FF",
+          glow: "rgba(0, 255, 178, 0.35)",
+        },
         sand: {
           50: "#FCFBF9",
           100: "#F9F6F0",
@@ -28,6 +37,7 @@ const config: Config = {
           700: "#325042",
           800: "#273E34",
           900: "#1E3028",
+          950: "#0D1814",
         },
         terracotta: {
           50: "#FBF5F2",
@@ -52,16 +62,50 @@ const config: Config = {
           700: "#4B443E",
           800: "#37322E",
           900: "#24211E",
-          950: "#171513",
+          950: "#0A0D0C",
         },
       },
       fontFamily: {
+        display: ["var(--font-display)", "Orbitron", "Exo 2", "sans-serif"],
         serif: ["var(--font-serif)", "Playfair Display", "Cormorant Garamond", "Georgia", "serif"],
         sans: ["var(--font-sans)", "Plus Jakarta Sans", "Inter", "system-ui", "-apple-system", "sans-serif"],
+      },
+      animation: {
+        'pulse-glow': 'pulseGlow 4s ease-in-out infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'float-reverse': 'floatReverse 7s ease-in-out infinite',
+        'aurora': 'aurora 12s ease-in-out infinite alternate',
+        'shimmer': 'shimmer 2.5s linear infinite',
+      },
+      keyframes: {
+        pulseGlow: {
+          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+          '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        floatReverse: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(12px)' },
+        },
+        aurora: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '100%': { backgroundPosition: '100% 50%' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(200%)' },
+        },
+      },
+      boxShadow: {
+        'neon-emerald': '0 0 25px -5px rgba(0, 255, 178, 0.4), 0 0 10px -2px rgba(0, 255, 178, 0.25)',
+        'neon-cyan': '0 0 25px -5px rgba(0, 229, 255, 0.4), 0 0 10px -2px rgba(0, 229, 255, 0.25)',
+        'glass-hover': '0 12px 36px 0 rgba(0, 255, 178, 0.12), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2)',
       },
     },
   },
   plugins: [],
 };
 export default config;
-
