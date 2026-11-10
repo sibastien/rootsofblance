@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { trackEvent } from '@/lib/analytics';
-import { Mail, ArrowRight, Send, CheckCircle2, Shield, Cpu, Activity, Sparkles } from 'lucide-react';
+import { Send, CheckCircle2, Heart, Sparkles, BookOpen } from 'lucide-react';
 import { InstagramIcon, YoutubeIcon } from '@/components/SocialIcons';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -25,7 +25,7 @@ export default function Footer() {
       const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'Futuristic Footer Newsletter' }),
+        body: JSON.stringify({ email, source: 'Editorial Footer Newsletter' }),
       });
 
       if (!res.ok) {
@@ -43,34 +43,37 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-[#020507] text-sand-200 border-t border-cyber-neon/20 pt-20 pb-12 overflow-hidden">
-      {/* Background cyber ambient lines */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-cyber-neon/5 via-transparent to-transparent pointer-events-none" />
+    <footer className="bg-[#18261F] text-sand-200 border-t border-[#23382D] pt-20 pb-12 relative overflow-hidden">
+      {/* Delicate background logo watermark */}
+      <div className="absolute top-0 ltr:right-0 rtl:left-0 -mr-16 -mt-16 opacity-5 pointer-events-none select-none invert">
+        <Image src="/images/logo.png" alt="" width={360} height={360} className="object-contain" />
+      </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-cyber-border">
-          {/* Brand Col */}
-          <div className="lg:col-span-2 space-y-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
+          {/* Brand Column */}
+          <div className="lg:col-span-2 space-y-4 text-left rtl:text-right">
             <div className="flex items-center gap-3.5">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyber-dark to-[#091a1d] border border-cyber-neon/40 flex items-center justify-center overflow-hidden p-2 shadow-neon-emerald">
+              <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden p-1 shadow-sm shrink-0">
                 <Image
                   src="/images/logo.png"
                   alt="Roots of Balance Logo"
-                  width={52}
-                  height={52}
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(0,255,178,0.5)]"
+                  width={48}
+                  height={48}
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>
-                <h3 className="font-display text-2xl font-bold text-white tracking-wider">Roots of Balance</h3>
-                <p className="text-xs uppercase tracking-widest font-mono text-cyber-neon flex items-center gap-1.5 mt-0.5">
-                  <Activity className="w-3.5 h-3.5 animate-pulse" />
-                  <span>{lang === 'ar' ? 'جذور التوازن • نظام حيوي ذكي' : 'BIO-HARMONIC ARCHITECTURE'}</span>
+                <h3 className="font-serif text-2xl text-sand-50 tracking-tight">
+                  {lang === 'ar' ? 'جذور التوازن' : 'Roots of Balance'}
+                </h3>
+                <p className="text-xs uppercase tracking-widest text-sage-300 font-medium">
+                  {lang === 'ar' ? 'مساحة للشفاء الشمولي واكتشاف الذات' : 'Holistic Healing & Self-Discovery'}
                 </p>
               </div>
             </div>
 
-            <p className="text-sm text-sand-300/80 leading-relaxed max-w-sm font-light">
+            <p className="text-sm text-sand-300/90 leading-relaxed max-w-sm font-light">
               {t.footer.desc}
             </p>
 
@@ -79,7 +82,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-cyber-dark border border-cyber-border flex items-center justify-center text-sand-300 hover:text-cyber-neon hover:border-cyber-neon hover:shadow-neon-emerald transition duration-300"
+                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sand-300 hover:text-white hover:bg-white/10 transition duration-300"
                 aria-label="Instagram"
               >
                 <InstagramIcon className="w-4 h-4" />
@@ -88,7 +91,7 @@ export default function Footer() {
                 href="https://youtube.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-cyber-dark border border-cyber-border flex items-center justify-center text-sand-300 hover:text-cyber-cyan hover:border-cyber-cyan hover:shadow-neon-cyan transition duration-300"
+                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sand-300 hover:text-white hover:bg-white/10 transition duration-300"
                 aria-label="YouTube"
               >
                 <YoutubeIcon className="w-4 h-4" />
@@ -96,80 +99,73 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-cyber-neon font-semibold flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyber-neon" />
-              <span>{t.footer.coachingColTitle}</span>
+          {/* Column 1: Dimensions */}
+          <div className="space-y-4 text-left rtl:text-right">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-sage-300">
+              {t.footer.dimensionsColTitle}
             </h4>
             <ul className="space-y-2.5 text-sm text-sand-300/80">
               <li>
-                <Link href="/about" className="hover:text-cyber-neon transition flex items-center gap-1.5">
-                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                <Link href="/#dimensions" className="hover:text-white transition">
+                  {lang === 'ar' ? 'التوازن العاطفي' : 'Emotional Wellbeing'}
+                </Link>
+              </li>
+              <li>
+                <Link href="/#dimensions" className="hover:text-white transition">
+                  {lang === 'ar' ? 'الصحة النفسية والذهنية' : 'Mental Wellbeing'}
+                </Link>
+              </li>
+              <li>
+                <Link href="/#dimensions" className="hover:text-white transition">
+                  {lang === 'ar' ? 'الصحة الجسدية وحيوية الجذور' : 'Physical Wellbeing'}
+                </Link>
+              </li>
+              <li>
+                <Link href="/#dimensions" className="hover:text-white transition">
+                  {lang === 'ar' ? 'التوازن الروحي والاتصال' : 'Spiritual Wellbeing'}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Knowledge & Exploration */}
+          <div className="space-y-4 text-left rtl:text-right">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-sage-300">
+              {t.footer.resourcesColTitle}
+            </h4>
+            <ul className="space-y-2.5 text-sm text-sand-300/80">
+              <li>
+                <Link href="/about" className="hover:text-white transition">
                   {t.nav.about}
                 </Link>
               </li>
               <li>
-                <Link href="/coaching" className="hover:text-cyber-neon transition flex items-center gap-1.5">
-                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
-                  {t.nav.services}
+                <Link href="/#philosophy" className="hover:text-white transition">
+                  {lang === 'ar' ? 'فلسفة التوازن' : 'Our Philosophy'}
                 </Link>
               </li>
               <li>
-                <Link href="/academy" className="hover:text-cyber-neon transition flex items-center gap-1.5">
-                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
-                  {t.nav.academy}
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-cyber-neon transition flex items-center gap-1.5">
-                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                <Link href="/blog" className="hover:text-white transition">
                   {t.nav.blog}
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-cyber-neon transition flex items-center gap-1.5">
-                  <span className="text-[10px] text-cyber-neon/40 font-mono">&gt;</span>
+                <Link href="/academy" className="hover:text-white transition">
+                  {t.nav.academy}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition">
                   {t.nav.contact}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Core Tracks */}
-          <div className="space-y-4">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-cyber-cyan font-semibold flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyber-cyan" />
-              <span>{t.footer.academyColTitle}</span>
-            </h4>
-            <ul className="space-y-2.5 text-sm text-sand-300/80">
-              <li>
-                <Link href="/coaching#stress" className="hover:text-cyber-cyan transition">
-                  {lang === 'ar' ? 'التحول العصبي والتوازن' : 'Nervous System Bio-Reset'}
-                </Link>
-              </li>
-              <li>
-                <Link href="/coaching#burnout" className="hover:text-cyber-cyan transition">
-                  {lang === 'ar' ? 'استعادة الطاقة الخلوية' : 'Vital Energy Optimization'}
-                </Link>
-              </li>
-              <li>
-                <Link href="/academy#curriculum" className="hover:text-cyber-cyan transition">
-                  {lang === 'ar' ? 'شهادة مدرب الرفاهية الشاملة' : 'Certified Bio-Wellness Mentor'}
-                </Link>
-              </li>
-              <li>
-                <Link href="/academy#faq" className="hover:text-cyber-cyan transition">
-                  {lang === 'ar' ? 'معايير التدريب والاعتماد' : 'Accreditation Matrix'}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* High-Tech Newsletter Dispatch */}
-          <div className="space-y-4">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-cyber-neon font-semibold flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-cyber-neon" />
+          {/* Column 3: The Mindful Journal */}
+          <div className="space-y-4 text-left rtl:text-right">
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-sage-300 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-sage-400" />
               <span>{t.footer.newsletterTitle}</span>
             </h4>
             <p className="text-xs text-sand-300/80 leading-relaxed font-light">
@@ -177,9 +173,9 @@ export default function Footer() {
             </p>
 
             {status === 'success' ? (
-              <div className="p-4 rounded-xl bg-cyber-neon/10 border border-cyber-neon/30 text-cyber-neon text-xs font-mono flex items-center gap-2.5">
-                <CheckCircle2 className="w-4 h-4 shrink-0" />
-                <span>{lang === 'ar' ? 'تم تأكيد اشتراكك بنجاح.' : 'Quantum uplink established. Check inbox.'}</span>
+              <div className="p-3.5 rounded-xl bg-sage-900/80 border border-sage-700/80 text-sand-200 text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-sage-300 shrink-0" />
+                <span>{t.footer.subscribedSuccess}</span>
               </div>
             ) : (
               <form onSubmit={handleNewsletterSubmit} className="space-y-2">
@@ -190,40 +186,35 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={t.footer.placeholderEmail}
                     required
-                    className="w-full pl-4 pr-10 py-2.5 text-xs rounded-xl bg-cyber-dark/80 border border-cyber-border focus:border-cyber-neon focus:ring-1 focus:ring-cyber-neon text-white placeholder-sand-500 font-mono transition"
+                    className="w-full pl-4 pr-10 py-2.5 text-xs rounded-xl bg-white/5 border border-white/10 focus:border-sage-400 focus:ring-1 focus:ring-sage-400 text-white placeholder-sand-400/60 font-light transition"
                   />
                   <button
                     type="submit"
                     disabled={status === 'loading'}
                     aria-label="Subscribe to newsletter"
-                    className="absolute right-2 top-2 p-1.5 rounded-lg bg-cyber-neon text-cyber-dark hover:scale-105 transition disabled:opacity-50"
+                    className="absolute ltr:right-2 rtl:left-2 top-2 p-1.5 rounded-lg bg-sage-700 hover:bg-sage-600 text-white transition disabled:opacity-50"
                   >
-                    <Send className="w-3.5 h-3.5" />
+                    <Send className="w-3.5 h-3.5 rtl:rotate-180" />
                   </button>
                 </div>
                 {status === 'error' && (
-                  <p className="text-[11px] text-red-400 font-mono">{errorMessage}</p>
+                  <p className="text-[11px] text-terracotta-300">{errorMessage}</p>
                 )}
               </form>
             )}
           </div>
         </div>
 
-        {/* Bottom Credits & System Telemetry */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-sand-400 font-mono gap-4">
-          <div className="flex items-center gap-3">
-            <span>&copy; {new Date().getFullYear()} Roots of Balance. All rights reserved.</span>
-            <span className="hidden sm:inline text-cyber-neon/30">•</span>
-            <span className="text-[10px] text-cyber-neon/70 hidden sm:inline flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-cyber-neon animate-pulse inline-block" />
-              STATUS: OPERATIONAL 99.98%
-            </span>
+        {/* Bottom Credits & Ethical Disclaimers */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-sand-400/80 gap-4 text-center md:text-left rtl:md:text-right">
+          <div>
+            <span>&copy; {new Date().getFullYear()} Roots of Balance (جذور التوازن). {t.footer.copyright}</span>
           </div>
-          <div className="flex items-center space-x-6 rtl:space-x-reverse">
-            <Link href="/privacy" className="hover:text-cyber-neon transition">
+          <div className="flex items-center space-x-6 rtl:space-x-reverse text-xs">
+            <Link href="/about#ethics" className="hover:text-sand-200 transition">
               {t.footer.credentialsEthics}
             </Link>
-            <Link href="/terms" className="hover:text-cyber-neon transition">
+            <Link href="/contact" className="hover:text-sand-200 transition">
               {t.footer.contact}
             </Link>
             <Link href="/admin" className="text-sand-500 hover:text-sand-300 transition">

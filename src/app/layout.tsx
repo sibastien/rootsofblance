@@ -4,46 +4,47 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
-import CyberBackground from '@/components/CyberBackground';
 import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
-  title: 'Roots of Balance | Futuristic Bio-Harmonic Wellness & Academy',
+  title: 'جذور التوازن | Roots of Balance — مساحة للشفاء الشمولي واكتشاف الذات',
   description:
-    'Guiding personal transformation through somatic bio-hacking, nervous system regulation, and mindful habit architecture. Offering 1-on-1 coaching sessions and a professional coach certification academy.',
+    'مساحة لاكتشاف الذات، وفهم أعمق للعلاقة بين العقل والجسد والروح، واستكشاف طرق أكثر وعياً للعيش بتوازن وانسجام. An editorial sanctuary dedicated to holistic wellbeing, mindful awareness, and self-discovery.',
   keywords: [
-    'Holistic Wellness Coach',
     'Roots of Balance',
-    'Futuristic Wellness',
-    'Coach Training Academy',
-    'Somatic Healing',
-    'Nervous System Regulation',
-    'Bio-Harmonic Wellness',
-    'Life Balance'
+    'جذور التوازن',
+    'الشفاء الشمولي',
+    'Holistic Wellbeing',
+    'اكتشاف الذات',
+    'العافية الشاملة',
+    'التوازن النفسي',
+    'اليقظة الذهنية',
+    'Mind Body Soul',
+    'Sarah T. Carr'
   ],
-  authors: [{ name: 'Alia Alblooki' }],
+  authors: [{ name: 'Sarah T. Carr' }],
   openGraph: {
-    title: 'Roots of Balance | Bio-Harmonic Wellness & Academy',
+    title: 'جذور التوازن | Roots of Balance',
     description:
-      'Grounded holistic wellness coaching for individuals and comprehensive professional academy training for future practitioners.',
+      'مساحة لاكتشاف الذات، وفهم أعمق للعلاقة بين العقل والجسد والروح، واستكشاف طرق أكثر وعياً للعيش بتوازن وانسجام.',
     url: 'https://rootsofbalance.com',
     siteName: 'Roots of Balance',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
+        url: '/images/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Roots of Balance Holistic Coaching',
+        alt: 'Roots of Balance',
       },
     ],
-    locale: 'en_US',
+    locale: 'ar_AE',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Roots of Balance | Bio-Harmonic Wellness & Academy',
-    description: 'Transformative somatic coaching and professional wellness coach certification academy.',
-    images: ['https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80'],
+    title: 'Roots of Balance | جذور التوازن',
+    description: 'رحلتك نحو التوازن تبدأ من الداخل — مساحة للشفاء الشمولي واكتشاف الذات.',
+    images: ['/images/logo.png'],
   },
 };
 
@@ -53,13 +54,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth dark">
-      <body className="min-h-screen flex flex-col bg-[#04080A] text-[#E6F4F1] antialiased overflow-x-hidden">
+    <html lang="ar" dir="rtl" className="scroll-smooth">
+      <body className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#221F1A] antialiased">
         <LanguageProvider>
-          <CyberBackground />
           <AnalyticsTracker />
           <Navbar />
-          <main className="flex-grow relative z-10">{children}</main>
+          <main className="flex-grow">{children}</main>
           <Footer />
           <CookieConsent />
         </LanguageProvider>

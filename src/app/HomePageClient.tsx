@@ -1,540 +1,682 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  Calendar,
-  GraduationCap,
+  Heart,
+  Brain,
   Sparkles,
   ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
-  HeartPulse,
+  ArrowDown,
   Compass,
   Sprout,
-  Clock,
   BookOpen,
-  Users,
-  Zap,
-  Activity,
-  Cpu,
-  Radio,
-  ArrowUpRight
+  Feather,
+  Sun,
+  Shield,
+  Eye,
+  CheckCircle2,
+  HelpCircle,
+  ChevronDown,
+  Layers,
+  GraduationCap
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { CoachingService, AcademyModule, Testimonial, CoachProfile } from '@/lib/db';
+import { CoachProfile, CoachingService, AcademyModule, BlogPost, Testimonial } from '@/lib/db';
 
 interface Props {
   profile: CoachProfile;
   services: CoachingService[];
   modules: AcademyModule[];
+  blogPosts: BlogPost[];
   testimonials: Testimonial[];
 }
 
-export default function HomePageClient({ profile, services, modules, testimonials }: Props) {
-  const { t, lang } = useLanguage();
+export default function HomePageClient({ profile, services, modules, blogPosts, testimonials }: Props) {
+  const { t, lang, dir } = useLanguage();
+
+  // Interactive state for Section 3: Dimensions
+  const [activeDimension, setActiveDimension] = useState<string>('emotional');
+
+  // Interactive state for Section 4: Self-Discovery reflection modal / card
+  const [activePillar, setActivePillar] = useState<string>('awareness');
+
+  const selectedDimension =
+    t.dimensions.items.find((d) => d.id === activeDimension) || t.dimensions.items[0];
+
+  const selectedPillar =
+    t.selfDiscovery.pillars.find((p) => p.id === activePillar) || t.selfDiscovery.pillars[0];
 
   return (
-    <div className="space-y-24 md:space-y-36 pb-24 text-[#E6F4F1]">
-      {/* 1. HERO SECTION: Futuristic Bio-Harmonic Matrix */}
-      <section className="relative overflow-hidden pt-12 md:pt-24 pb-20">
-        {/* Holographic Glowing Ambient Background Rings */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-cyber-neon/15 via-cyber-cyan/10 to-transparent rounded-full blur-[120px] pointer-events-none -z-10" />
+    <div className="space-y-24 md:space-y-36 pb-24 text-earth-900">
+      
+      {/* =========================================================================
+          SECTION 1 — HERO: "رحلتك نحو التوازن تبدأ من الداخل"
+          ========================================================================= */}
+      <section className="relative min-h-[85vh] flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#FAF8F5] via-[#F6F2EC] to-[#FAF8F5]">
+        {/* Subtle organic background aura */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-sage-100/60 rounded-full blur-[100px] pointer-events-none -z-10" />
+        
+        {/* Delicate olive tree roots logo watermark */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.035] pointer-events-none select-none">
+          <Image src="/images/logo.png" alt="" width={384} height={384} className="object-contain" priority />
+        </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
-            
-            {/* Left High-Tech Content */}
-            <div className="lg:col-span-7 space-y-7 text-center ltr:lg:text-left rtl:lg:text-right">
-              {/* Sci-Fi Status Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-cyber-dark/80 border border-cyber-neon/30 text-cyber-neon text-xs font-mono tracking-widest uppercase shadow-neon-emerald">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyber-neon opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyber-neon" />
-                </span>
-                <span className="font-semibold">{t.hero.tagline}</span>
-              </div>
+        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
+          {/* Subtle Sanctuary Tag */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand-200/80 border border-sand-300 text-earth-700 text-xs tracking-wider uppercase font-medium shadow-soft">
+            <span className="w-1.5 h-1.5 rounded-full bg-sage-600 inline-block" />
+            <span>{t.hero.tagline}</span>
+          </div>
 
-              {/* Holographic Gradient Heading */}
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white font-extrabold leading-[1.12] tracking-tight">
-                <span className="block">{t.hero.titleLine1}</span>
-                <span className="block mt-1 bg-gradient-to-r from-cyber-neon via-cyber-cyan to-white bg-clip-text text-transparent filter drop-shadow-[0_0_20px_rgba(0,255,178,0.35)]">
-                  {t.hero.titleLine2}
-                </span>
-              </h1>
+          {/* Main Headline */}
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-earth-950 font-normal leading-[1.2] tracking-tight">
+            {t.hero.headline}
+          </h1>
 
-              <p className="text-base sm:text-lg text-sand-300/90 leading-relaxed max-w-2xl font-light">
-                {t.hero.description}
-              </p>
+          {/* Supporting Subtext */}
+          <p className="text-base sm:text-lg md:text-xl text-earth-700 leading-relaxed font-light max-w-2xl mx-auto">
+            {t.hero.subtext}
+          </p>
 
-              {/* Dual-Journey Futuristic HUD Cards */}
-              <div className="pt-3 grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-xl mx-auto ltr:lg:mx-0 rtl:lg:mx-0">
-                {/* Journey A: Individuals */}
-                <div className="cyber-card rounded-2xl p-6 text-left rtl:text-right flex flex-col justify-between group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-cyber-neon/5 rounded-bl-full pointer-events-none group-hover:bg-cyber-neon/15 transition-all" />
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[11px] font-mono uppercase tracking-widest text-cyber-neon font-semibold flex items-center gap-1.5">
-                        <Activity className="w-3.5 h-3.5" />
-                        {lang === 'ar' ? 'مسار الأفراد' : 'PROTOCOL: INDIVIDUAL'}
-                      </span>
-                    </div>
-                    <h2 className="font-display text-lg font-bold text-white mb-2 group-hover:text-cyber-neon transition-colors">
-                      {t.hero.journeyATitle}
-                    </h2>
-                    <p className="text-xs text-sand-300/80 mb-5 leading-relaxed font-light">
-                      {t.hero.journeyASub}
-                    </p>
-                  </div>
-                  <Link
-                    href="/book"
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-bold text-cyber-dark bg-cyber-neon hover:bg-cyber-emerald hover:shadow-neon-emerald px-4 py-2.5 rounded-xl transition-all duration-300 w-fit"
-                  >
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>{t.nav.bookSession}</span>
-                  </Link>
-                </div>
+          {/* Gentle, non-commercial CTA */}
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#what-is-holistic"
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-sm font-medium tracking-wide transition-all duration-300 shadow-editorial hover:shadow-elevated"
+            >
+              <span>{t.hero.cta}</span>
+              <ArrowDown className="w-4 h-4 animate-bounce" />
+            </a>
+          </div>
 
-                {/* Journey B: Practitioners */}
-                <div className="cyber-card rounded-2xl p-6 text-left rtl:text-right flex flex-col justify-between group relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-cyber-cyan/5 rounded-bl-full pointer-events-none group-hover:bg-cyber-cyan/15 transition-all" />
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[11px] font-mono uppercase tracking-widest text-cyber-cyan font-semibold flex items-center gap-1.5">
-                        <Cpu className="w-3.5 h-3.5" />
-                        {lang === 'ar' ? 'مسار الأكاديمية' : 'PROTOCOL: ACADEMY'}
-                      </span>
-                    </div>
-                    <h2 className="font-display text-lg font-bold text-white mb-2 group-hover:text-cyber-cyan transition-colors">
-                      {t.hero.journeyBTitle}
-                    </h2>
-                    <p className="text-xs text-sand-300/80 mb-5 leading-relaxed font-light">
-                      {t.hero.journeyBSub}
-                    </p>
-                  </div>
-                  <Link
-                    href="/academy"
-                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider font-semibold text-cyber-cyan hover:text-white bg-cyber-dark/80 hover:bg-cyber-cyan/20 border border-cyber-cyan/40 hover:shadow-neon-cyan px-4 py-2.5 rounded-xl transition-all duration-300 w-fit"
-                  >
-                    <GraduationCap className="w-3.5 h-3.5 text-cyber-cyan" />
-                    <span>{t.nav.becomeCoach}</span>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Cyber Telemetry & Social Proof */}
-              <div className="pt-2 flex items-center justify-center ltr:lg:justify-start rtl:lg:justify-start gap-4 text-xs font-mono text-sand-400">
-                <div className="flex -space-x-2 rtl:space-x-reverse">
-                  <div className="w-7 h-7 rounded-full bg-cyber-neon/20 border border-cyber-neon flex items-center justify-center text-[10px] font-bold text-cyber-neon shadow-neon-emerald">
-                    AA
-                  </div>
-                  <div className="w-7 h-7 rounded-full bg-cyber-cyan/20 border border-cyber-cyan flex items-center justify-center text-[10px] font-bold text-cyber-cyan shadow-neon-cyan">
-                    RO
-                  </div>
-                  <div className="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-[10px] font-bold text-emerald-300">
-                    LK
-                  </div>
-                </div>
-                <span className="text-sand-300/90">{t.hero.socialProof}</span>
-              </div>
-            </div>
-
-            {/* Right Visual Image with Cybernetic Frame */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative mx-auto max-w-sm lg:max-w-none group">
-                {/* Tech Bracket Corners */}
-                <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-cyber-neon z-20 pointer-events-none" />
-                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-cyber-cyan z-20 pointer-events-none" />
-
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-cyber-neon/30 relative bg-cyber-dark">
-                  <Image
-                    src="/images/alia-alblooki.jpg"
-                    alt="Alia Alblooki - Holistic Wellness Mentor"
-                    fill
-                    priority
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyber-dark via-cyber-dark/20 to-transparent" />
-                  
-                  {/* Floating Holographic Quote HUD */}
-                  <div className="absolute bottom-6 left-6 right-6 cyber-card p-4 rounded-xl border border-cyber-neon/30 backdrop-blur-xl text-left rtl:text-right shadow-neon-emerald">
-                    <p className="font-serif italic text-sm text-sand-100 font-light">
-                      &quot;{t.hero.quoteText}&quot;
-                    </p>
-                    <span className="block text-[11px] uppercase font-mono tracking-wider text-cyber-neon font-semibold mt-2 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyber-neon animate-pulse" />
-                      {t.hero.quoteAuthor}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Animated Pulsing Auras */}
-                <div className="absolute -top-8 -right-8 w-44 h-44 bg-cyber-neon/15 rounded-full blur-3xl -z-10 animate-pulse-glow" />
-                <div className="absolute -bottom-8 -left-8 w-44 h-44 bg-cyber-cyan/15 rounded-full blur-3xl -z-10 animate-float" />
-              </div>
-            </div>
-
+          {/* Scroll Hint */}
+          <div className="pt-8">
+            <span className="text-[11px] uppercase tracking-widest text-earth-500 font-light block">
+              {t.hero.scrollHint}
+            </span>
           </div>
         </div>
       </section>
 
-      {/* 2. PHILOSOPHY & PILLARS: Bio-Harmonic Architecture */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <span className="text-xs uppercase font-mono tracking-widest text-cyber-neon font-semibold px-3 py-1 rounded-full bg-cyber-neon/10 border border-cyber-neon/20 inline-block">
-            {t.philosophy.subtitle}
+
+      {/* =========================================================================
+          SECTION 2 — WHAT IS HOLISTIC HEALING? (مفهوم الشفاء الشمولي)
+          ========================================================================= */}
+      <section id="what-is-holistic" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Left Column: Visual Storytelling & Imagery */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative mx-auto max-w-md lg:max-w-none">
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border-4 border-white relative bg-sand-100">
+                <Image
+                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1000&q=80"
+                  alt="Holistic Healing Sanctuary"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-earth-950/60 via-transparent to-transparent" />
+                
+                {/* Floating Quote Card */}
+                <div className="absolute bottom-6 left-6 right-6 bg-[#FAF8F5]/95 backdrop-blur-md p-5 rounded-2xl border border-sand-300 shadow-soft text-left rtl:text-right">
+                  <p className="font-serif italic text-sm text-earth-900 leading-relaxed">
+                    {t.whatIsHolistic.quote}
+                  </p>
+                  <span className="block text-xs uppercase tracking-wider text-sage-800 font-semibold mt-2">
+                    — {t.whatIsHolistic.quoteAuthor}
+                  </span>
+                </div>
+              </div>
+
+              {/* Decorative botanical aura */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-sage-200/50 rounded-full blur-2xl -z-10" />
+            </div>
+          </div>
+
+          {/* Right Column: Editorial Essay */}
+          <div className="lg:col-span-7 space-y-6 text-left rtl:text-right">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sage-100 border border-sage-200 text-xs uppercase tracking-widest text-sage-800 font-semibold">
+              <Sprout className="w-3.5 h-3.5 text-sage-700" />
+              <span>{t.whatIsHolistic.badge}</span>
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-[1.25]">
+              {t.whatIsHolistic.title}
+            </h2>
+
+            <p className="text-lg sm:text-xl text-sage-900 font-light leading-relaxed">
+              {t.whatIsHolistic.lead}
+            </p>
+
+            <div className="space-y-4 text-base text-earth-700 font-light leading-relaxed">
+              <p>{t.whatIsHolistic.p1}</p>
+              <p>{t.whatIsHolistic.p2}</p>
+            </div>
+
+            {/* Interconnected Dimension Callout */}
+            <div className="p-5 rounded-2xl bg-sand-100/70 border border-sand-300/80 space-y-2">
+              <h3 className="font-serif text-base text-earth-900 font-medium flex items-center gap-2">
+                <Compass className="w-4 h-4 text-sage-700" />
+                <span>{t.whatIsHolistic.interconnectedTitle}</span>
+              </h3>
+              <p className="text-xs text-earth-600 leading-relaxed font-light">
+                {t.whatIsHolistic.interconnectedDesc}
+              </p>
+            </div>
+
+            <div className="pt-2">
+              <a
+                href="#dimensions"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold text-sage-800 hover:text-sage-900 underline underline-offset-8"
+              >
+                <span>{t.whatIsHolistic.cta}</span>
+                <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* =========================================================================
+          SECTION 3 — THE DIMENSIONS OF WELLBEING (أبعاد العافية)
+          ========================================================================= */}
+      <section id="dimensions" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14 space-y-4">
+          <span className="text-xs uppercase tracking-widest text-sage-800 font-semibold px-3.5 py-1 rounded-full bg-sage-100 border border-sage-200 inline-block">
+            {t.dimensions.badge}
           </span>
-          <h2 className="font-display text-3xl sm:text-4xl text-white font-bold tracking-tight">
-            {t.philosophy.title}
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal">
+            {t.dimensions.title}
           </h2>
-          <p className="text-base text-sand-300 font-light leading-relaxed">
-            {t.philosophy.intro}
+          <p className="text-base text-earth-600 font-light leading-relaxed">
+            {t.dimensions.lead}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            { title: t.philosophy.p1Title, desc: t.philosophy.p1Desc, icon: HeartPulse, color: 'text-cyber-neon', border: 'border-cyber-neon/20' },
-            { title: t.philosophy.p2Title, desc: t.philosophy.p2Desc, icon: Sprout, color: 'text-emerald-400', border: 'border-emerald-500/20' },
-            { title: t.philosophy.p3Title, desc: t.philosophy.p3Desc, icon: Compass, color: 'text-cyber-cyan', border: 'border-cyber-cyan/20' },
-            { title: t.philosophy.p4Title, desc: t.philosophy.p4Desc, icon: ShieldCheck, color: 'text-teal-300', border: 'border-teal-400/20' },
-          ].map((item, idx) => {
-            const IconComponent = item.icon;
+        {/* Dimension Selector Tabs */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-8">
+          {t.dimensions.items.map((dimension) => {
+            const isSelected = activeDimension === dimension.id;
             return (
-              <div
-                key={idx}
-                className="cyber-card rounded-2xl p-7 text-left rtl:text-right relative overflow-hidden group hover:border-cyber-neon/50"
+              <button
+                key={dimension.id}
+                onClick={() => setActiveDimension(dimension.id)}
+                className={`p-4 rounded-2xl border text-center transition-all duration-300 flex flex-col items-center justify-center gap-2 ${
+                  isSelected
+                    ? 'bg-sage-800 text-sand-50 border-sage-800 shadow-editorial'
+                    : 'bg-white hover:bg-sand-100 text-earth-800 border-sand-300'
+                }`}
               >
-                <div className="w-12 h-12 rounded-xl bg-cyber-dark/80 border border-cyber-border flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <IconComponent className={`w-6 h-6 ${item.color}`} />
-                </div>
-                <h3 className="font-display text-lg text-white font-bold mb-2.5 group-hover:text-cyber-neon transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-sand-300/80 leading-relaxed font-light">
-                  {item.desc}
-                </p>
-              </div>
+                <span className="font-serif text-base font-medium">{dimension.title}</span>
+                <span className={`text-[11px] font-sans ${isSelected ? 'text-sage-200' : 'text-earth-500'}`}>
+                  {dimension.tagline}
+                </span>
+              </button>
             );
           })}
         </div>
+
+        {/* Selected Dimension Deep-Dive Display Card */}
+        <div className="editorial-card rounded-3xl p-8 sm:p-12 lg:p-14 border border-sand-300 bg-white">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <div className="lg:col-span-7 space-y-6 text-left rtl:text-right">
+              <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold block">
+                {selectedDimension.tagline}
+              </span>
+
+              <h3 className="font-serif text-3xl sm:text-4xl text-earth-950 font-normal">
+                {selectedDimension.title}
+              </h3>
+
+              <p className="text-base text-earth-800 leading-relaxed font-light">
+                {selectedDimension.desc}
+              </p>
+
+              <p className="text-sm text-earth-600 leading-relaxed font-light">
+                {selectedDimension.deepDive}
+              </p>
+
+              {/* Key Facets */}
+              <div className="space-y-2.5 pt-2">
+                {selectedDimension.aspects.map((aspect, idx) => (
+                  <div key={idx} className="flex items-center gap-2.5 text-xs text-earth-700 font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-sage-600 shrink-0" />
+                    <span>{aspect}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: Contemplative Self-Inquiry Box */}
+            <div className="lg:col-span-5 bg-sand-100 rounded-2xl p-7 border border-sand-300/80 space-y-4 text-left rtl:text-right">
+              <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-sage-800 font-semibold">
+                <HelpCircle className="w-4 h-4 text-sage-700" />
+                <span>{t.dimensions.reflectionLabel}</span>
+              </div>
+
+              <blockquote className="font-serif italic text-base text-earth-900 leading-relaxed">
+                &ldquo;{selectedDimension.inquiry}&rdquo;
+              </blockquote>
+
+              <p className="text-xs text-earth-500 font-light">
+                {lang === 'ar'
+                  ? 'خذي نفساً عميقاً، وأعطي نفسكِ دقيقة واحدة من الصمت لملاحظة ما ينبثق في داخلكِ.'
+                  : 'Take a soft breath and allow yourself a quiet minute to simply witness what surfaces.'}
+              </p>
+
+              <div className="pt-2">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-sage-800 hover:text-sage-900 underline underline-offset-4"
+                >
+                  <span>{t.dimensions.exploreFurther}</span>
+                  <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </section>
 
-      {/* 3. PERSONAL COACHING SERVICES (Journey A) */}
-      <section className="relative border-y border-cyber-neon/15 py-24 bg-gradient-to-b from-transparent via-[#06151a]/40 to-transparent">
+
+      {/* =========================================================================
+          SECTION 4 — THE JOURNEY OF SELF-DISCOVERY (رحلة اكتشاف الذات)
+          ========================================================================= */}
+      <section className="bg-sand-100/70 border-y border-sand-300/60 py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
-            <div className="text-left rtl:text-right">
-              <span className="text-xs uppercase font-mono tracking-widest text-cyber-neon font-semibold block mb-2">
-                {t.servicesSection.subtitle}
-              </span>
-              <h2 className="font-display text-3xl sm:text-4xl text-white font-bold">
-                {t.servicesSection.title}
-              </h2>
-              <p className="text-sm text-sand-300 mt-2 max-w-xl font-light">
-                {t.servicesSection.intro}
-              </p>
-            </div>
+          
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <span className="text-xs uppercase tracking-widest text-sage-800 font-semibold px-3.5 py-1 rounded-full bg-sand-200 border border-sand-300 inline-block">
+              {t.selfDiscovery.badge}
+            </span>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal">
+              {t.selfDiscovery.title}
+            </h2>
+            <p className="text-base text-earth-600 font-light leading-relaxed">
+              {t.selfDiscovery.lead}
+            </p>
+          </div>
+
+          {/* 6 Pillars of Self-Discovery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.selfDiscovery.pillars.map((pillar) => {
+              const isSelected = activePillar === pillar.id;
+              return (
+                <div
+                  key={pillar.id}
+                  onClick={() => setActivePillar(pillar.id)}
+                  className={`editorial-card rounded-2xl p-7 flex flex-col justify-between cursor-pointer text-left rtl:text-right transition-all duration-300 ${
+                    isSelected
+                      ? 'border-sage-500 bg-sand-50 shadow-editorial'
+                      : 'border-sand-300 bg-white'
+                  }`}
+                >
+                  <div className="space-y-4">
+                    <div className="w-10 h-10 rounded-full bg-sage-100 border border-sage-200 flex items-center justify-center text-sage-800">
+                      <Feather className="w-4 h-4" />
+                    </div>
+
+                    <h3 className="font-serif text-lg font-medium text-earth-900">
+                      {pillar.title}
+                    </h3>
+
+                    <p className="text-xs text-earth-600 leading-relaxed font-light">
+                      {pillar.concept}
+                    </p>
+
+                    <div className="pt-2 border-t border-sand-200">
+                      <span className="text-[11px] uppercase tracking-wider text-sage-700 font-semibold block mb-1">
+                        {lang === 'ar' ? 'سؤال للتفكير الهادئ:' : 'Contemplative Inquiry:'}
+                      </span>
+                      <p className="text-xs font-serif italic text-earth-800 leading-relaxed">
+                        &ldquo;{pillar.reflectionQuestion}&rdquo;
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 pt-3 text-[11px] text-sage-800 font-light">
+                    {pillar.guidance}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="text-center pt-12">
             <Link
-              href="/coaching"
-              className="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-wider font-semibold text-cyber-neon hover:text-white transition"
+              href="/about"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-xs uppercase tracking-wider font-medium transition shadow-sm"
             >
-              <span>{t.servicesSection.viewAll}</span>
-              <ArrowRight className="w-4 h-4 rtl:rotate-180" />
+              <span>{t.selfDiscovery.cta}</span>
+              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="cyber-card rounded-2xl p-7 flex flex-col justify-between group hover:border-cyber-neon/60 text-left rtl:text-right"
+        </div>
+      </section>
+
+
+      {/* =========================================================================
+          SECTION 5 — THE PHILOSOPHY OF ROOTS OF BALANCE (فلسفة جذور التوازن)
+          ========================================================================= */}
+      <section id="philosophy" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 scroll-mt-24">
+        <div className="bg-[#1C2C23] text-sand-100 rounded-3xl p-8 sm:p-14 lg:p-16 relative overflow-hidden shadow-elevated">
+          
+          {/* Subtle Olive Tree Watermark */}
+          <div className="absolute top-0 ltr:right-0 rtl:left-0 -mr-12 -mt-12 opacity-10 pointer-events-none select-none invert">
+            <Image src="/images/logo.png" alt="" width={320} height={320} className="object-contain" />
+          </div>
+
+          <div className="max-w-3xl space-y-6 text-left rtl:text-right relative z-10">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sage-900 border border-sage-700 text-xs uppercase tracking-widest text-sage-300 font-semibold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>{t.philosophy.badge}</span>
+            </div>
+
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight text-white">
+              {t.philosophy.title}
+            </h2>
+
+            <p className="text-base sm:text-lg text-sand-200 font-light leading-relaxed">
+              {t.philosophy.lead}
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+              <div className="space-y-2">
+                <h3 className="font-serif text-lg text-sage-200 font-medium">
+                  {t.philosophy.nameOriginTitle}
+                </h3>
+                <p className="text-xs text-sand-300 leading-relaxed font-light">
+                  {t.philosophy.nameOriginDesc}
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <h3 className="font-serif text-lg text-sage-200 font-medium">
+                  {t.philosophy.journeyNotDestinationTitle}
+                </h3>
+                <p className="text-xs text-sand-300 leading-relaxed font-light">
+                  {t.philosophy.journeyNotDestinationDesc}
+                </p>
+              </div>
+            </div>
+
+            {/* Core Values */}
+            <div className="pt-6 border-t border-sage-800">
+              <h3 className="text-xs uppercase tracking-widest text-sage-300 font-semibold mb-4">
+                {t.philosophy.valuesTitle}
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {t.philosophy.values.map((v, i) => (
+                  <div key={i} className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sage-400 mt-2 shrink-0" />
+                    <div>
+                      <span className="text-sm font-medium text-white block">{v.title}</span>
+                      <span className="text-xs text-sand-400 font-light">{v.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-4">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-sand-100 hover:bg-white text-earth-950 font-medium text-xs uppercase tracking-wider transition shadow-sm"
               >
-                <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-sand-400 mb-4">
-                    <span className="px-2.5 py-1 rounded-full bg-cyber-neon/10 border border-cyber-neon/20 text-cyber-neon font-semibold">
-                      {service.category}
-                    </span>
-                    <span className="flex items-center gap-1.5 text-sand-400">
-                      <Clock className="w-3.5 h-3.5 text-cyber-cyan" />
-                      {service.durationMinutes} {lang === 'ar' ? 'دقيقة' : 'mins'}
-                    </span>
-                  </div>
+                <span>{t.philosophy.cta}</span>
+                <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+              </Link>
+            </div>
 
-                  <h3 className="font-display text-xl text-white font-bold mb-3 group-hover:text-cyber-neon transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-sand-300/80 leading-relaxed mb-6 font-light">
-                    {service.shortDesc}
-                  </p>
-
-                  <div className="space-y-2.5 mb-6">
-                    <span className="text-xs font-mono uppercase tracking-wider text-cyber-neon/80 font-semibold block">
-                      {lang === 'ar' ? 'أهداف البروتوكول:' : 'Protocol Milestones:'}
-                    </span>
-                    {service.objectives.slice(0, 3).map((obj) => (
-                      <div key={obj} className="flex items-start gap-2.5 text-xs text-sand-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-cyber-neon shrink-0 mt-0.5" />
-                        <span>{obj}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-cyber-border flex items-center justify-between">
-                  <div>
-                    <span className="text-[11px] font-mono text-sand-400 block">{t.servicesSection.investment}</span>
-                    <span className="font-display text-2xl font-bold text-cyber-neon">
-                      ${service.price}
-                    </span>
-                  </div>
-                  <Link
-                    href={`/book?service=${service.id}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-cyber-neon text-cyber-dark text-xs uppercase font-mono font-bold tracking-wider hover:bg-cyber-emerald hover:shadow-neon-emerald transition-all"
-                  >
-                    <span>{t.servicesSection.bookNow}</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* 4. TRAINING ACADEMY PREVIEW (Journey B) */}
+
+      {/* =========================================================================
+          SECTION 6 — MEET SARAH (تعرّفي على سارة ت. كار)
+          ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border border-cyber-cyan/30 bg-gradient-to-br from-[#06181e] via-[#040e12] to-cyber-dark shadow-neon-cyan">
-          {/* Logo Watermark Hologram */}
-          <div className="absolute top-0 ltr:right-0 rtl:left-0 -mr-10 -mt-10 opacity-10 pointer-events-none select-none">
-            <Image src="/images/logo.png" alt="" width={320} height={320} className="object-contain filter invert drop-shadow-[0_0_20px_#00E5FF]" />
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
-            <div className="lg:col-span-7 space-y-6 text-left rtl:text-right">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyber-dark border border-cyber-cyan/40 text-xs font-mono uppercase tracking-widest text-cyber-cyan font-semibold">
-                <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                <span>{t.academySection.badge}</span>
-              </div>
-
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight text-white">
-                {t.academySection.title}
-              </h2>
-
-              <p className="text-sm sm:text-base text-sand-300 leading-relaxed font-light max-w-xl">
-                {t.academySection.desc}
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyber-dark border border-cyber-cyan/30 flex items-center justify-center text-cyber-cyan shrink-0">
-                    <BookOpen className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-sm font-semibold text-white block">{t.academySection.feature1Title}</span>
-                    <span className="text-xs text-sand-400 font-mono">{t.academySection.feature1Sub}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyber-dark border border-cyber-neon/30 flex items-center justify-center text-cyber-neon shrink-0">
-                    <Users className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-sm font-semibold text-white block">{t.academySection.feature2Title}</span>
-                    <span className="text-xs text-sand-400 font-mono">{t.academySection.feature2Sub}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <Link
-                  href="/academy"
-                  className="px-6 py-3 rounded-xl bg-cyber-cyan text-cyber-dark font-mono font-bold text-xs uppercase tracking-wider hover:bg-white hover:shadow-neon-cyan transition-all inline-flex items-center gap-2"
-                >
-                  <span>{t.academySection.ctaExplore}</span>
-                  <ArrowRight className="w-4 h-4 rtl:rotate-180" />
-                </Link>
-                <Link
-                  href="/academy/apply"
-                  className="px-6 py-3 rounded-xl border border-cyber-neon/40 text-cyber-neon hover:text-white hover:bg-cyber-neon/10 font-mono font-semibold text-xs uppercase tracking-wider transition-all"
-                >
-                  {t.academySection.ctaApply}
-                </Link>
-              </div>
-            </div>
-
-            {/* Curriculum Snapshot Cards */}
-            <div className="lg:col-span-5 space-y-3.5 text-left rtl:text-right">
-              <span className="text-xs uppercase font-mono tracking-widest text-cyber-cyan font-semibold block mb-2">
-                {t.academySection.curriculumSnapshot}
-              </span>
-              {modules.slice(0, 4).map((mod) => (
-                <div
-                  key={mod.id}
-                  className="bg-cyber-dark/80 border border-cyber-cyan/20 rounded-xl p-4 hover:border-cyber-cyan/50 hover:bg-cyber-dark transition-all"
-                >
-                  <div className="flex items-center justify-between text-xs font-mono text-cyber-cyan mb-1.5">
-                    <span className="font-semibold uppercase tracking-wider">
-                      {lang === 'ar' ? `المستوى ${mod.moduleNumber}` : `STAGE 0${mod.moduleNumber}`}
-                    </span>
-                    <span className="text-sand-400">{mod.durationWeeks} {lang === 'ar' ? 'أسابيع' : 'weeks'}</span>
-                  </div>
-                  <h4 className="text-sm font-display text-white font-semibold mb-1">
-                    {mod.title}
-                  </h4>
-                  <p className="text-xs text-sand-300/80 font-light line-clamp-1">
-                    {mod.subtitle}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. MEET ALIA ALBLOOKI */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          {/* Portrait of Sarah T. Carr */}
           <div className="lg:col-span-5 relative">
-            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border border-cyber-neon/30 relative bg-cyber-dark">
+            <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-elevated border-4 border-sand-200 relative bg-sand-100">
               <Image
                 src="/images/alia-alblooki.jpg"
-                alt="Alia Alblooki - Founder"
+                alt="Sarah T. Carr - Holistic Healing Guide"
                 fill
+                sizes="(max-width: 768px) 100vw, 40vw"
                 className="object-cover"
               />
             </div>
-            <div className="absolute -bottom-4 ltr:-right-4 rtl:-left-4 cyber-card rounded-xl p-3 shadow-neon-emerald flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-cyber-dark border border-cyber-neon/40 flex items-center justify-center p-1">
-                <Image src="/images/logo.png" alt="Logo" width={32} height={32} className="object-contain" />
+            
+            <div className="absolute -bottom-4 ltr:-right-4 rtl:-left-4 bg-[#FAF8F5] border border-sand-300 rounded-2xl p-4 shadow-editorial text-center flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center overflow-hidden p-1 border border-sand-200 shadow-sm">
+                <Image src="/images/logo.png" alt="Logo" width={40} height={40} className="object-contain" />
               </div>
-              <span className="text-[11px] uppercase font-mono tracking-wider text-cyber-neon font-semibold">Roots of Balance</span>
+              <div className="text-left rtl:text-right">
+                <span className="text-xs uppercase tracking-wider text-earth-900 font-semibold block">Roots of Balance</span>
+                <span className="text-[10px] text-sage-700 font-light block">Sarah T. Carr • سارة ت. كار</span>
+              </div>
             </div>
           </div>
 
+          {/* Authentic Personal Story */}
           <div className="lg:col-span-7 space-y-6 text-left rtl:text-right">
-            <span className="text-xs uppercase font-mono tracking-widest text-cyber-neon font-semibold px-3 py-1 rounded-full bg-cyber-neon/10 border border-cyber-neon/20 inline-block">
-              {t.meetAlia.badge}
+            <span className="text-xs uppercase tracking-widest text-sage-800 font-semibold px-3 py-1 rounded-full bg-sage-100 border border-sage-200 inline-block">
+              {t.meetSarah.badge}
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl text-white font-bold">
-              {t.meetAlia.name}
+
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal">
+              {t.meetSarah.name}
             </h2>
-            <p className="text-xs uppercase font-mono tracking-widest text-cyber-cyan font-semibold">
-              {t.meetAlia.title}
+
+            <p className="text-xs uppercase tracking-widest text-sage-800 font-medium">
+              {t.meetSarah.title}
             </p>
 
-            <div className="space-y-4 text-sm text-sand-300 leading-relaxed font-light">
-              <p>{t.meetAlia.p1}</p>
-              <p>{t.meetAlia.p2}</p>
+            <p className="text-base sm:text-lg text-earth-900 font-normal italic font-serif">
+              {t.meetSarah.greeting}
+            </p>
+
+            <div className="space-y-4 text-sm sm:text-base text-earth-700 leading-relaxed font-light">
+              <p>{t.meetSarah.p1}</p>
+              <p>{t.meetSarah.p2}</p>
             </div>
 
-            <div className="pt-4 border-t border-cyber-border grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {profile.credentials.map((cred) => (
-                <div key={cred.title} className="flex items-start gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-cyber-neon shrink-0 mt-0.5" />
-                  <div>
-                    <h5 className="text-xs font-semibold text-white">{cred.title}</h5>
-                    <p className="text-[11px] text-sand-400 font-mono">{cred.institution} ({cred.year})</p>
-                  </div>
-                </div>
-              ))}
+            {/* Personal Quote */}
+            <div className="p-5 rounded-2xl bg-sand-100/80 border border-sand-300/80">
+              <p className="font-serif italic text-sm text-earth-900 leading-relaxed">
+                {t.meetSarah.quote}
+              </p>
             </div>
 
             <div className="pt-2">
               <Link
                 href="/about"
-                className="inline-flex items-center gap-2 text-xs uppercase font-mono tracking-wider font-semibold text-cyber-neon hover:text-white transition"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-wider font-semibold text-sage-800 hover:text-sage-900 underline underline-offset-8"
               >
-                <span>{t.meetAlia.readBio}</span>
+                <span>{t.meetSarah.cta}</span>
                 <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
               </Link>
             </div>
           </div>
+
         </div>
       </section>
 
-      {/* 6. AUTHENTIC TESTIMONIALS */}
-      <section className="relative py-24 border-t border-cyber-neon/15 bg-gradient-to-b from-transparent via-[#06151a]/30 to-transparent">
+
+      {/* =========================================================================
+          SECTION 7 — EXPLORE AND LEARN (استكشفي وتعلّمي)
+          ========================================================================= */}
+      <section id="explore" className="bg-sand-100/60 py-24 border-y border-sand-300/60 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <span className="text-xs uppercase font-mono tracking-widest text-cyber-neon font-semibold px-3 py-1 rounded-full bg-cyber-neon/10 border border-cyber-neon/20 inline-block">
-              {t.testimonialsSection.badge}
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl text-white font-bold">
-              {t.testimonialsSection.title}
-            </h2>
-            <p className="text-xs font-mono text-sand-400">
-              {t.testimonialsSection.sub}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((test) => (
-              <div
-                key={test.id}
-                className="cyber-card rounded-2xl p-8 flex flex-col justify-between text-left rtl:text-right"
-              >
-                <div>
-                  <div className="flex items-center gap-1.5 mb-4 text-cyber-neon">
-                    {Array.from({ length: test.rating }).map((_, i) => (
-                      <Sparkles key={i} className="w-4 h-4 fill-cyber-neon" />
-                    ))}
-                  </div>
-                  <p className="text-sm text-sand-200 leading-relaxed font-light mb-6 italic">
-                    &quot;{test.quote}&quot;
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-cyber-border flex items-center justify-between text-xs">
-                  <div>
-                    <span className="font-semibold text-white block">{test.name}</span>
-                    <span className="text-sand-400 font-mono text-[11px]">{test.role}</span>
-                  </div>
-                  <span className="px-2.5 py-1 rounded-full bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/20 font-mono text-[10px]">
-                    {test.category === 'personal_coaching'
-                      ? (lang === 'ar' ? 'جلسة تدريب فردي' : 'Bio-Coaching Protocol')
-                      : (lang === 'ar' ? 'الأكاديمية التدريبية' : 'Academy Fellow')}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. QUANTUM ENGAGEMENT CTA */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="cyber-card rounded-3xl p-10 sm:p-14 text-center border-cyber-neon/40 shadow-neon-emerald relative overflow-hidden">
-          <div className="max-w-2xl mx-auto space-y-6 relative z-10">
-            <span className="text-xs uppercase font-mono tracking-widest text-cyber-neon font-bold">
-              {lang === 'ar' ? 'ابدأ رحلة التوازن الحيوية' : 'INITIALIZE BIO-HARMONIC TRANSFORMATION'}
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white">
-              {lang === 'ar' ? 'جاهز لإعادة تشكيل طاقتك وتوازنك العصبي؟' : 'Ready to Harmonize Your Mind, Body, and Purpose?'}
-            </h2>
-            <p className="text-sm text-sand-300 font-light leading-relaxed">
-              {lang === 'ar' 
-                ? 'احجز استشارتك الفردية أو انضم إلى نخبة ممارسي الرفاهية الشاملة المعتمدين.'
-                : 'Schedule an individual breakthrough session or enroll in the world-class Holistic Wellness Coach Certification.'}
-            </p>
-            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-              <Link
-                href="/book"
-                className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-cyber-neon to-cyber-emerald text-cyber-dark font-mono font-bold text-xs uppercase tracking-wider hover:shadow-neon-emerald hover:scale-105 transition-all flex items-center gap-2"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>{t.nav.bookSession}</span>
-              </Link>
-              <Link
-                href="/academy"
-                className="px-8 py-3.5 rounded-xl bg-cyber-dark border border-cyber-cyan/40 text-cyber-cyan hover:text-white hover:border-cyber-cyan font-mono font-semibold text-xs uppercase tracking-wider hover:shadow-neon-cyan transition-all flex items-center gap-2"
-              >
-                <GraduationCap className="w-4 h-4" />
-                <span>{t.nav.becomeCoach}</span>
-              </Link>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="text-left rtl:text-right max-w-2xl space-y-2">
+              <span className="text-xs uppercase tracking-widest text-sage-800 font-semibold px-3 py-1 rounded-full bg-sand-200 border border-sand-300 inline-block">
+                {t.exploreLearn.badge}
+              </span>
+              <h2 className="font-serif text-3xl sm:text-4xl text-earth-950 font-normal">
+                {t.exploreLearn.title}
+              </h2>
+              <p className="text-sm text-earth-600 font-light leading-relaxed">
+                {t.exploreLearn.lead}
+              </p>
             </div>
+
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-semibold text-sage-800 hover:text-sage-900 underline underline-offset-4"
+            >
+              <span>{t.exploreLearn.cta}</span>
+              <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180" />
+            </Link>
           </div>
+
+          {/* 4 Educational Gateways */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: t.exploreLearn.card1Title,
+                desc: t.exploreLearn.card1Desc,
+                link: t.exploreLearn.card1Link,
+                icon: BookOpen,
+              },
+              {
+                title: t.exploreLearn.card2Title,
+                desc: t.exploreLearn.card2Desc,
+                link: t.exploreLearn.card2Link,
+                icon: Feather,
+              },
+              {
+                title: t.exploreLearn.card3Title,
+                desc: t.exploreLearn.card3Desc,
+                link: t.exploreLearn.card3Link,
+                icon: Compass,
+              },
+              {
+                title: t.exploreLearn.card4Title,
+                desc: t.exploreLearn.card4Desc,
+                link: t.exploreLearn.card4Link,
+                icon: GraduationCap,
+              },
+            ].map((card, idx) => {
+              const IconComp = card.icon;
+              return (
+                <Link
+                  key={idx}
+                  href={card.link}
+                  className="editorial-card rounded-2xl p-7 bg-white flex flex-col justify-between group hover:border-sage-400 text-left rtl:text-right"
+                >
+                  <div className="space-y-4">
+                    <div className="w-11 h-11 rounded-xl bg-sage-50 border border-sage-200/80 flex items-center justify-center text-sage-800 group-hover:scale-105 transition-transform">
+                      <IconComp className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-serif text-lg text-earth-900 font-medium group-hover:text-sage-800 transition-colors">
+                      {card.title}
+                    </h3>
+                    <p className="text-xs text-earth-600 leading-relaxed font-light">
+                      {card.desc}
+                    </p>
+                  </div>
+
+                  <div className="pt-6 border-t border-sand-200 flex items-center gap-1.5 text-xs text-sage-800 font-medium">
+                    <span>{lang === 'ar' ? 'استكشاف المحتوى' : 'Explore pathway'}</span>
+                    <ArrowRight className="w-3.5 h-3.5 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Featured Articles Section from DB */}
+          {blogPosts && blogPosts.length > 0 && (
+            <div className="mt-16 pt-12 border-t border-sand-300/80 space-y-6">
+              <span className="text-xs uppercase tracking-widest text-earth-500 font-semibold block text-center">
+                {lang === 'ar' ? 'من أحدث مقالات المجلة المعرفية' : 'Featured Journal Essays'}
+              </span>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {blogPosts.map((post) => (
+                  <Link
+                    key={post.id}
+                    href={`/blog/${post.slug}`}
+                    className="p-6 rounded-2xl bg-white border border-sand-300 hover:border-sage-400 transition text-left rtl:text-right flex flex-col justify-between"
+                  >
+                    <div>
+                      <span className="text-[11px] text-sage-700 font-medium uppercase tracking-wider block mb-2">
+                        {post.category}
+                      </span>
+                      <h4 className="font-serif text-base text-earth-900 font-medium mb-2 line-clamp-2">
+                        {post.title}
+                      </h4>
+                      <p className="text-xs text-earth-600 font-light line-clamp-3 leading-relaxed">
+                        {post.excerpt}
+                      </p>
+                    </div>
+                    <div className="pt-4 mt-4 border-t border-sand-200 text-[11px] text-earth-500 flex items-center justify-between">
+                      <span>{post.readingTimeMinutes} {lang === 'ar' ? 'دقائق قراءة' : 'min read'}</span>
+                      <span className="text-sage-800 font-medium flex items-center gap-1">
+                        {lang === 'ar' ? 'قراءة المقال' : 'Read essay'} &rarr;
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
         </div>
       </section>
+
+
+      {/* =========================================================================
+          SECTION 8 — FINAL INVITATION (الدعوة الختامية)
+          ========================================================================= */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="editorial-card rounded-3xl p-10 sm:p-16 border border-sand-300 bg-white shadow-editorial space-y-6 relative overflow-hidden">
+          
+          <div className="w-12 h-12 rounded-full bg-sage-100 border border-sage-200 flex items-center justify-center mx-auto text-sage-800">
+            <Heart className="w-5 h-5 text-sage-700" />
+          </div>
+
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-tight">
+            {t.finalInvitation.headline}
+          </h2>
+
+          <p className="text-base sm:text-lg text-earth-700 font-light leading-relaxed max-w-xl mx-auto">
+            {t.finalInvitation.supporting}
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/#what-is-holistic"
+              className="px-8 py-3.5 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-xs uppercase tracking-wider font-medium transition shadow-sm"
+            >
+              <span>{t.finalInvitation.cta}</span>
+            </Link>
+            <Link
+              href="/about"
+              className="px-8 py-3.5 rounded-full bg-sand-100 hover:bg-sand-200 border border-sand-300 text-earth-800 text-xs uppercase tracking-wider font-medium transition"
+            >
+              <span>{t.nav.about}</span>
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
     </div>
   );
 }

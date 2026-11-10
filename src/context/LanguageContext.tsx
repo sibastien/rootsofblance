@@ -12,15 +12,15 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType>({
-  lang: 'en',
+  lang: 'ar',
   setLang: () => {},
   toggleLang: () => {},
-  t: translations.en,
-  dir: 'ltr',
+  t: translations.ar,
+  dir: 'rtl',
 });
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Language>('en');
+  const [lang, setLangState] = useState<Language>('ar');
 
   useEffect(() => {
     // Check URL search parameter or localStorage
@@ -34,6 +34,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('rob_lang') as Language;
     if (saved === 'ar' || saved === 'en') {
       setLang(saved);
+    } else {
+      // Default to Arabic-first as requested
+      setLang('ar');
     }
   }, []);
 
@@ -45,7 +48,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   };
 
   const toggleLang = () => {
-    setLang(lang === 'en' ? 'ar' : 'en');
+    setLang(lang === 'ar' ? 'en' : 'ar');
   };
 
   const dir: 'ltr' | 'rtl' = lang === 'ar' ? 'rtl' : 'ltr';
@@ -56,7 +59,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         lang,
         setLang,
         toggleLang,
-        t: translations[lang],
+        t: translations[lang] || translations.ar,
         dir,
       }}
     >
@@ -66,6 +69,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useLanguage() {
-  return useContext(LanguageContext);
+  const context = useContext(LanguageContext);
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
 }
-
