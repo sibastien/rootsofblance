@@ -8,7 +8,6 @@ import {
   Brain,
   Sparkles,
   ArrowRight,
-  ArrowDown,
   Compass,
   Sprout,
   BookOpen,
@@ -23,6 +22,7 @@ import {
   GraduationCap
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import HeroDiorama from '@/components/HeroDiorama';
 import { CoachProfile, CoachingService, AcademyModule, BlogPost, Testimonial } from '@/lib/db';
 
 interface Props {
@@ -52,53 +52,10 @@ export default function HomePageClient({ profile, services, modules, blogPosts, 
     <div className="space-y-24 md:space-y-36 pb-24 text-earth-900">
       
       {/* =========================================================================
-          SECTION 1 — HERO: "رحلتك نحو التوازن تبدأ من الداخل"
+          SECTION 1 — HERO DIORAMA: "رحلتك نحو التوازن تبدأ من الداخل"
+          Cinematic multi-layer parallax scrolling panorama
           ========================================================================= */}
-      <section className="relative min-h-[85vh] flex items-center justify-center pt-8 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-b from-[#FAF8F5] via-[#F6F2EC] to-[#FAF8F5]">
-        {/* Subtle organic background aura */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-sage-100/60 rounded-full blur-[100px] pointer-events-none -z-10" />
-        
-        {/* Delicate olive tree roots logo watermark */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.035] pointer-events-none select-none">
-          <Image src="/images/logo.png" alt="" width={384} height={384} className="object-contain" priority />
-        </div>
-
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          {/* Subtle Sanctuary Tag */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand-200/80 border border-sand-300 text-earth-700 text-xs tracking-wider uppercase font-medium shadow-soft">
-            <span className="w-1.5 h-1.5 rounded-full bg-sage-600 inline-block" />
-            <span>{t.hero.tagline}</span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-earth-950 font-normal leading-[1.2] tracking-tight">
-            {t.hero.headline}
-          </h1>
-
-          {/* Supporting Subtext */}
-          <p className="text-base sm:text-lg md:text-xl text-earth-700 leading-relaxed font-light max-w-2xl mx-auto">
-            {t.hero.subtext}
-          </p>
-
-          {/* Gentle, non-commercial CTA */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="#what-is-holistic"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-sm font-medium tracking-wide transition-all duration-300 shadow-editorial hover:shadow-elevated"
-            >
-              <span>{t.hero.cta}</span>
-              <ArrowDown className="w-4 h-4 animate-bounce" />
-            </a>
-          </div>
-
-          {/* Scroll Hint */}
-          <div className="pt-8">
-            <span className="text-[11px] uppercase tracking-widest text-earth-500 font-light block">
-              {t.hero.scrollHint}
-            </span>
-          </div>
-        </div>
-      </section>
+      <HeroDiorama />
 
 
       {/* =========================================================================
