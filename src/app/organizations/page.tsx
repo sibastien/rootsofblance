@@ -14,9 +14,9 @@ export default function OrganizationsPage() {
           <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold">
             جذور التوازن — للمؤسسات
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-earth-950 font-normal leading-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-[1.35] sm:leading-[1.4] pb-2">
             فِرقٌ أكثر وعياً...<br />
-            <span className="text-sage-700">وقيادةٌ أكثر قدرة على التغيير</span>
+            <span className="text-sage-700 block mt-2">وقيادةٌ أكثر قدرة على التغيير</span>
           </h1>
           <p className="text-base sm:text-lg text-earth-700 font-light leading-relaxed max-w-2xl mx-auto">
             نصمّم في جذور التوازن تجارب تدريب وتطوير تركز على المهارات التي تظهر في العمل اليومي:

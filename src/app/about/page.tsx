@@ -28,9 +28,9 @@ export default function AboutPage() {
               <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold">
                 عن مؤسسة جذور التوازن
               </span>
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-tight">
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-[1.35] sm:leading-[1.4] pb-2">
                 أؤمن أن التوسع الحقيقي<br />
-                <span className="text-sage-700">يبدأ من الداخل</span>
+                <span className="text-sage-700 block mt-2">يبدأ من الداخل</span>
               </h1>
               <p className="text-sm font-medium text-earth-900">
                 علياء البلوكي | مؤسسة جذور التوازن، مدربة ومستشارة في العافية الشاملة وتطوير الذات،

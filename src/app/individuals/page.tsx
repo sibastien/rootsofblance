@@ -14,9 +14,9 @@ export default function IndividualsPage() {
           <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold">
             جذور التوازن — لألفراد
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-earth-950 font-normal leading-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-[1.35] sm:leading-[1.4] pb-2">
             مساحة للعودة إلى نفسِك<br />
-            <span className="text-sage-700">وبناء حياة أكثر اتزاناً</span>
+            <span className="text-sage-700 block mt-2">وبناء حياة أكثر اتزاناً</span>
           </h1>
           <p className="text-base sm:text-lg text-earth-700 font-light leading-relaxed max-w-2xl mx-auto">
             بين مسؤوليات الحياة وتوقعات الآخرين، قد يصبح الاهتمام بنفسِك آخر ما تمنحينه وقتِك.

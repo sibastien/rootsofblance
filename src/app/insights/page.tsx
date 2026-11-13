@@ -59,9 +59,9 @@ export default function InsightsPage() {
           <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold">
             مكتبة جذور التوازن
           </span>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-earth-950 font-normal leading-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-earth-950 font-normal leading-[1.35] sm:leading-[1.4] pb-2">
             المعرفة التي تمنحك وضوحاً...<br />
-            <span className="text-sage-700">والممارسة التي تصنع الفرق</span>
+            <span className="text-sage-700 block mt-2">والممارسة التي تصنع الفرق</span>
           </h1>
           <p className="text-base sm:text-lg text-earth-700 font-light leading-relaxed max-w-2xl mx-auto">
             مساحة للأفكار والأسئلة والأدوات التي تساعدك على فهم نفسك وعاداتك وعالقاتك،
