@@ -1,25 +1,26 @@
 'use client';
 
 import Image from 'next/image';
+import Interactive3DSeal from '@/components/Interactive3DSeal';
 
 /* ─────────────────────────────────────────────────────────────────────────────
    FINAL INVITATION LUXURY EMBLEM (Section 8)
-   Authentic Roots of Balance emblem bathed in soft morning light.
+   Authentic Roots of Balance emblem with real-time 3D Torus and golden aura
 ───────────────────────────────────────────────────────────────────────────── */
 
 export default function FinalInvitationDiorama() {
   return (
-    <div className="w-16 h-16 mx-auto relative mb-6 select-none" aria-hidden="true">
-      {/* Soft golden halo */}
-      <div className="absolute inset-0 rounded-full bg-sage-200/50 blur-lg animate-pulse" />
+    <div className="mx-auto relative mb-4 select-none flex flex-col items-center">
+      {/* Real-time 3D WebGL Harmonic Seal */}
+      <Interactive3DSeal />
 
-      {/* Luxury emblem frame */}
-      <div className="w-16 h-16 rounded-full bg-white border border-sand-300 shadow-soft flex items-center justify-center p-2 relative z-10 transition-transform hover:scale-105">
+      {/* Embedded Brand Core Logo */}
+      <div className="-mt-36 sm:-mt-44 mb-10 w-20 h-20 rounded-full bg-white/90 backdrop-blur-md border border-sand-300 shadow-soft flex items-center justify-center p-2 relative z-10 transition-transform hover:scale-105">
         <Image
           src="/images/logo.png"
           alt="Roots of Balance"
-          width={44}
-          height={44}
+          width={56}
+          height={56}
           className="object-contain"
         />
       </div>

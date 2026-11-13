@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
 import { LanguageProvider } from '@/context/LanguageContext';
+import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 
 export const metadata: Metadata = {
   title: 'جذور التوازن | Roots of Balance — مساحة للشفاء الشمولي واكتشاف الذات',
@@ -57,11 +58,13 @@ export default function RootLayout({
     <html lang="ar" dir="rtl" className="scroll-smooth">
       <body className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#221F1A] antialiased">
         <LanguageProvider>
-          <AnalyticsTracker />
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-          <CookieConsent />
+          <SmoothScrollProvider>
+            <AnalyticsTracker />
+            <Navbar />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+            <CookieConsent />
+          </SmoothScrollProvider>
         </LanguageProvider>
       </body>
     </html>
