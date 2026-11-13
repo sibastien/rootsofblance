@@ -55,18 +55,84 @@ body::before {
   font-family: var(--font-arabic-sans);
 }
 
-/* Luxury Editorial Styling Utilities */
+/* Luxury Editorial Styling Utilities - UI/UX Pro Max Nature-Distilled & Liquid Glass */
 .editorial-card {
   background: #FFFFFF;
   border: 1px solid rgba(227, 216, 202, 0.7);
   box-shadow: 0 10px 30px -10px rgba(34, 53, 43, 0.04);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1.25rem;
 }
 
 .editorial-card:hover {
-  border-color: rgba(111, 155, 135, 0.5);
-  box-shadow: 0 20px 40px -15px rgba(34, 53, 43, 0.08);
-  transform: translateY(-2px);
+  border-color: rgba(61, 96, 78, 0.4);
+  box-shadow: 0 20px 40px -12px rgba(34, 53, 43, 0.09);
+  transform: translateY(-3px);
+}
+
+/* Glass panel with subtle lensing */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(227, 216, 202, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(34, 53, 43, 0.04);
+}
+
+/* Accessible interactive buttons - min 44px touch targets */
+.btn-primary {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  background-color: #2F4A3C;
+  color: #FAF8F5;
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px 0 rgba(47, 74, 60, 0.2);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #22352B;
+  box-shadow: 0 6px 20px 0 rgba(47, 74, 60, 0.28);
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #2F4A3C;
+  outline-offset: 3px;
+}
+
+.btn-secondary {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #221F1A;
+  border: 1px solid #D5C6B4;
+  font-weight: 500;
+  font-size: 0.875rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #FAF8F5;
+  border-color: #9FBDAE;
+  transform: translateY(-1px);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid #2F4A3C;
+  outline-offset: 3px;
 }
 
 .editorial-quote {
