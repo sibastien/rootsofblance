@@ -99,30 +99,30 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 1: Dimensions */}
+          {/* Column 1: Core Paths */}
           <div className="space-y-4 text-left rtl:text-right">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-sage-300">
-              {t.footer.dimensionsColTitle}
+              {lang === 'ar' ? 'مسارات الموقع' : 'Main Tracks'}
             </h4>
             <ul className="space-y-2.5 text-sm text-sand-300/80">
               <li>
-                <Link href="/#dimensions" className="hover:text-white transition">
-                  {lang === 'ar' ? 'التوازن العاطفي' : 'Emotional Wellbeing'}
+                <Link href="/" className="hover:text-white transition">
+                  {lang === 'ar' ? 'الرئيسية' : 'Home'}
                 </Link>
               </li>
               <li>
-                <Link href="/#dimensions" className="hover:text-white transition">
-                  {lang === 'ar' ? 'الصحة النفسية والذهنية' : 'Mental Wellbeing'}
+                <Link href="/individuals" className="hover:text-white transition">
+                  {lang === 'ar' ? 'لألفراد' : 'For Individuals'}
                 </Link>
               </li>
               <li>
-                <Link href="/#dimensions" className="hover:text-white transition">
-                  {lang === 'ar' ? 'الصحة الجسدية وحيوية الجذور' : 'Physical Wellbeing'}
+                <Link href="/return-to-self" className="hover:text-white transition">
+                  {lang === 'ar' ? 'العودة إلى الذات' : 'Return to Self'}
                 </Link>
               </li>
               <li>
-                <Link href="/#dimensions" className="hover:text-white transition">
-                  {lang === 'ar' ? 'التوازن الروحي والاتصال' : 'Spiritual Wellbeing'}
+                <Link href="/organizations" className="hover:text-white transition">
+                  {lang === 'ar' ? 'للمؤسسات' : 'For Organizations'}
                 </Link>
               </li>
             </ul>
@@ -131,32 +131,27 @@ export default function Footer() {
           {/* Column 2: Knowledge & Exploration */}
           <div className="space-y-4 text-left rtl:text-right">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-sage-300">
-              {t.footer.resourcesColTitle}
+              {lang === 'ar' ? 'عن علياء والمعرفة' : 'About & Insights'}
             </h4>
             <ul className="space-y-2.5 text-sm text-sand-300/80">
               <li>
                 <Link href="/about" className="hover:text-white transition">
-                  {t.nav.about}
+                  {lang === 'ar' ? 'عن علياء البلوكي' : 'About Alia'}
                 </Link>
               </li>
               <li>
-                <Link href="/#philosophy" className="hover:text-white transition">
-                  {lang === 'ar' ? 'فلسفة التوازن' : 'Our Philosophy'}
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="hover:text-white transition">
-                  {t.nav.blog}
-                </Link>
-              </li>
-              <li>
-                <Link href="/academy" className="hover:text-white transition">
-                  {t.nav.academy}
+                <Link href="/insights" className="hover:text-white transition">
+                  {lang === 'ar' ? 'مكتبة المعرفة' : 'Insights & Podcast'}
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-white transition">
-                  {t.nav.contact}
+                  {lang === 'ar' ? 'التواصل والحجز' : 'Contact & Booking'}
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition">
+                  {lang === 'ar' ? 'الدليل المجاني' : 'Free Guide'}
                 </Link>
               </li>
             </ul>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { ArrowDown } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -157,13 +158,18 @@ export default function HeroDiorama() {
 
         {/* Subtle, non-commercial CTA */}
         <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="#what-is-holistic"
+          <Link
+            href="/contact"
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-sm font-medium tracking-wide transition-all duration-300 shadow-editorial hover:shadow-elevated hover:-translate-y-0.5"
           >
             <span>{t.hero.cta}</span>
-            <ArrowDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-1" />
-          </a>
+          </Link>
+          <Link
+            href="/organizations"
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white/80 hover:bg-white text-earth-800 border border-sand-300 text-sm font-medium tracking-wide transition-all duration-300 shadow-sm"
+          >
+            <span>{t.nav.about === 'عن علياء والفلسفة' ? 'استكشفوا خدمات المؤسسات' : 'Explore Corporate Services'}</span>
+          </Link>
         </div>
 
         {/* Scroll Hint */}

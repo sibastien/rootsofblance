@@ -35,12 +35,12 @@ export default function Navbar() {
   }
 
   const navLinks = [
-    { name: t.nav.about, href: '/about' },
-    { name: lang === 'ar' ? 'أبعاد العافية' : 'Dimensions', href: '/#dimensions' },
-    { name: lang === 'ar' ? 'فلسفة التوازن' : 'Philosophy', href: '/#philosophy' },
-    { name: t.nav.blog, href: '/blog' },
-    { name: t.nav.academy, href: '/academy' },
-    { name: t.nav.contact, href: '/contact' },
+    { name: lang === 'ar' ? 'الرئيسية' : 'Home', href: '/' },
+    { name: lang === 'ar' ? 'لألفراد' : 'For Individuals', href: '/individuals' },
+    { name: lang === 'ar' ? 'للمؤسسات' : 'For Organizations', href: '/organizations' },
+    { name: lang === 'ar' ? 'عن علياء' : 'About Alia', href: '/about' },
+    { name: lang === 'ar' ? 'المعرفة' : 'Insights', href: '/insights' },
+    { name: lang === 'ar' ? 'تواصل / حجز' : 'Contact & Booking', href: '/contact' },
   ];
 
   return (
@@ -48,13 +48,13 @@ export default function Navbar() {
       {/* Editorial Announcement Banner */}
       <div className="bg-[#1C2C23] text-sand-100 px-4 py-2 text-center text-xs tracking-wide font-light flex items-center justify-center gap-2">
         <Sparkles className="w-3.5 h-3.5 text-sage-300 shrink-0" />
-        <span className="opacity-90">{t.nav.taglineBadge}</span>
+        <span className="opacity-90">{lang === 'ar' ? 'التوسع يبدأ من الداخل... والأثر يظهر في الحياة والعمل' : 'Expansion begins from within... and the impact shows in life and work'}</span>
         <span className="hidden md:inline opacity-40">|</span>
         <Link
-          href="/#what-is-holistic"
+          href="/return-to-self"
           className="hidden md:inline underline underline-offset-4 text-sand-200 hover:text-white transition font-normal"
         >
-          {lang === 'ar' ? 'اكتشفي مفهوم الشفاء الشمولي' : 'Discover Holistic Healing'} &rarr;
+          {lang === 'ar' ? 'اكتشفي برنامج العودة إلى الذات' : 'Discover Return to Self Program'} &rarr;
         </Link>
       </div>
 
@@ -119,11 +119,11 @@ export default function Navbar() {
 
             {/* Subtle Editorial Exploration CTA (Non-Sales) */}
             <Link
-              href="/#explore"
+              href="/contact"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-xs font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow"
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span>{t.nav.exploreResources}</span>
+              <span>{lang === 'ar' ? 'حمّلي الدليل المجاني' : 'Download Free Guide'}</span>
             </Link>
           </div>
 

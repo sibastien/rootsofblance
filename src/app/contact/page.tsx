@@ -2,277 +2,379 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { trackEvent } from '@/lib/analytics';
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Send,
-  CheckCircle2,
-  AlertCircle,
-  Sparkles,
-  ExternalLink
-} from 'lucide-react';
-import { InstagramIcon, YoutubeIcon } from '@/components/SocialIcons';
+import { Mail, Phone, Calendar, Send, CheckCircle2, Building, User } from 'lucide-react';
 
 export default function ContactPage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [tab, setTab] = useState<'individual' | 'corporate'>('individual');
+  const [submitted, setSubmitted] = useState(false);
 
-  const [submitting, setSubmitting] = useState(false);
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [errorMsg, setErrorMsg] = useState('');
+  // Individual Form State
+  const [indName, setIndName] = useState('');
+  const [indEmail, setIndEmail] = useState('');
+  const [indPhone, setIndPhone] = useState('');
+  const [indTopic, setIndTopic] = useState('العودة إلى الذات');
+  const [indDate, setIndDate] = useState('');
+  const [indNote, setIndNote] = useState('');
+  const [indConsent, setIndConsent] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Corporate Form State
+  const [corpOrg, setCorpOrg] = useState('');
+  const [corpContact, setCorpContact] = useState('');
+  const [corpEmail, setCorpEmail] = useState('');
+  const [corpPhone, setCorpPhone] = useState('');
+  const [corpTopic, setCorpTopic] = useState('القيادة والمرونة المهنية');
+  const [corpGoals, setCorpGoals] = useState('');
+  const [corpAudienceCount, setCorpAudienceCount] = useState('');
+  const [corpConsent, setCorpConsent] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitting(true);
-    setStatus('idle');
-    setErrorMsg('');
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, subject, message }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to dispatch message');
-      }
-
-      setStatus('success');
-      setName('');
-      setEmail('');
-      setPhone('');
-      setSubject('');
-      setMessage('');
-
-      trackEvent('contact_submitted', { subject });
-    } catch (err: unknown) {
-      setStatus('error');
-      setErrorMsg(err instanceof Error ? err.message : 'Failed to send enquiry.');
-    } finally {
-      setSubmitting(false);
-    }
+    setSubmitted(true);
   };
 
   return (
-    <div className="space-y-16 pb-24">
-      {/* Header */}
-      <section className="bg-sand-100/70 border-b border-sand-300/60 pt-16 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-4">
-            <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold block">
-              Reach Out & Connect
-            </span>
-            <h1 className="font-serif text-4xl sm:text-5xl text-earth-950 font-normal leading-tight">
-              Get in Touch with Roots of Balance
-            </h1>
-            <p className="text-base sm:text-lg text-earth-700 font-light leading-relaxed">
-              Have questions regarding our 1-on-1 personal coaching sessions, international time zones, or upcoming training academy admissions? We would love to hear from you.
-            </p>
-          </div>
+    <div className="min-h-screen bg-sand-50" dir="rtl">
+      {/* Hero */}
+      <section className="relative bg-gradient-to-b from-[#f5f0e8] to-sand-50 pt-20 pb-16 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold">
+            جذور التوازن — التواصل والحجز
+          </span>
+          <h1 className="font-serif text-4xl sm:text-5xl text-earth-950 font-normal leading-tight">
+            التواصل يبدأ بخطوة واضحة
+          </h1>
+          <p className="text-base text-earth-700 font-light leading-relaxed max-w-2xl mx-auto">
+            سواءٌ كنتِ تبحثين عن مساحة لفهم احتياجاتِك واختيار برنامج يناسبِك، أو تمثلون مؤسسة ترغب
+            في تطوير مهارات فريقها، اختاروا المسار المناسب، وسنوضح لكم الخطوة التالية بكل بساطة.
+          </p>
         </div>
       </section>
 
-      {/* Main Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          
-          {/* Left Column: Direct channels */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="bg-sand-50 border border-sand-300 rounded-3xl p-8 space-y-6">
-              <h3 className="font-serif text-2xl text-earth-900 font-medium">
-                Direct Channels
-              </h3>
+      {/* Selector Tabs */}
+      <section className="max-w-3xl mx-auto px-4 pt-4 pb-8">
+        <div className="grid grid-cols-2 gap-3 bg-sand-200/60 p-1.5 rounded-2xl">
+          <button
+            type="button"
+            onClick={() => { setTab('individual'); setSubmitted(false); }}
+            className={`py-3 rounded-xl text-xs sm:text-sm font-medium transition flex items-center justify-center gap-2 ${
+              tab === 'individual'
+                ? 'bg-white text-earth-950 shadow-sm'
+                : 'text-earth-600 hover:text-earth-900'
+            }`}
+          >
+            <User className="w-4 h-4 text-sage-700" />
+            <span>مسار الأفراد (مكالمة استكشافية)</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => { setTab('corporate'); setSubmitted(false); }}
+            className={`py-3 rounded-xl text-xs sm:text-sm font-medium transition flex items-center justify-center gap-2 ${
+              tab === 'corporate'
+                ? 'bg-white text-earth-950 shadow-sm'
+                : 'text-earth-600 hover:text-earth-900'
+            }`}
+          >
+            <Building className="w-4 h-4 text-sage-700" />
+            <span>مسار المؤسسات (طلب تدريب)</span>
+          </button>
+        </div>
+      </section>
 
-              <div className="space-y-4 text-xs sm:text-sm text-earth-800">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center text-sage-800 shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-earth-500 text-xs block">Official Email</span>
-                    <a href="mailto:rootsofbalance@outlook.com" className="font-medium text-sage-900 hover:underline">
-                      rootsofbalance@outlook.com
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-sage-100 flex items-center justify-center text-sage-800 shrink-0">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <span className="text-earth-500 text-xs block">Studio & Online Base</span>
-                    <span className="font-medium text-earth-900">Manlius, New York • Online Globally (MENA & Worldwide)</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Channels List */}
-              <div className="pt-6 border-t border-sand-200 space-y-3">
-                <span className="text-xs uppercase tracking-wider font-semibold text-earth-700 block">
-                  Official Channels & Community:
-                </span>
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <a
-                    href="https://instagram.com/roots__of_balance"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-sand-100 hover:bg-sand-200 rounded-xl border border-sand-300 flex items-center gap-2 text-earth-800 font-medium transition"
-                  >
-                    <InstagramIcon className="w-4 h-4 text-pink-700" />
-                    <span>Instagram</span>
-                  </a>
-
-                  <a
-                    href="https://t.me/RootsOfBalance"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-sand-100 hover:bg-sand-200 rounded-xl border border-sand-300 flex items-center gap-2 text-earth-800 font-medium transition"
-                  >
-                    <Send className="w-4 h-4 text-sky-600" />
-                    <span>Telegram</span>
-                  </a>
-
-                  <a
-                    href="https://youtube.com/@RootsOfBalance"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-sand-100 hover:bg-sand-200 rounded-xl border border-sand-300 flex items-center gap-2 text-earth-800 font-medium transition"
-                  >
-                    <YoutubeIcon className="w-4 h-4 text-red-600" />
-                    <span>YouTube</span>
-                  </a>
-
-                  <a
-                    href="https://linktr.ee/RootsOfBalance"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-sand-100 hover:bg-sand-200 rounded-xl border border-sand-300 flex items-center gap-2 text-earth-800 font-medium transition"
-                  >
-                    <ExternalLink className="w-4 h-4 text-sage-700" />
-                    <span>Linktree Hub</span>
-                  </a>
-                </div>
-              </div>
+      {/* Main Content Area */}
+      <section className="max-w-3xl mx-auto px-4 pb-20">
+        {submitted ? (
+          <div className="bg-white border border-sage-200 rounded-3xl p-8 sm:p-12 text-center space-y-4 shadow-sm">
+            <div className="w-14 h-14 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-8 h-8" />
             </div>
-          </div>
-
-          {/* Right Column: Contact Message Form */}
-          <div className="lg:col-span-7 bg-sand-50 border border-sand-300 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
-            <div>
-              <h3 className="font-serif text-2xl text-earth-900 font-medium mb-1">
-                Send a Message
-              </h3>
-              <p className="text-xs text-earth-600 font-light">
-                We typically reply within 24–48 business hours.
-              </p>
-            </div>
-
-            {status === 'success' && (
-              <div className="bg-sage-100 border border-sage-300 rounded-2xl p-4 text-xs text-sage-900 flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-sage-700 shrink-0" />
-                <span>Thank you. Your message has been received. We will respond to your email promptly.</span>
-              </div>
+            {tab === 'individual' ? (
+              <>
+                <h3 className="font-serif text-2xl text-earth-900">تم استلام طلب المكالمة</h3>
+                <p className="text-sm text-earth-600 font-light leading-relaxed max-w-md mx-auto">
+                  شكراً لحجزِك. تم إرسال تفاصيل الموعد ومعلومات الاتصال إلى بريدك الإلكتروني ({indEmail}).
+                  يرجى مراجعة التاريخ والوقت قبل الموعد.
+                </p>
+              </>
+            ) : (
+              <>
+                <h3 className="font-serif text-2xl text-earth-900">تم استلام طلب التعاون</h3>
+                <p className="text-sm text-earth-600 font-light leading-relaxed max-w-md mx-auto">
+                  شكراً لاهتمامكم بالتعاون مع جذور التوازن. استلمنا المعلومات الأولية عن احتياجكم التدريبي،
+                  وسنراجع الطلب ونتواصل معكم لاستكمال التفاصيل ومناقشة مقترح العمل.
+                </p>
+              </>
             )}
-
-            {status === 'error' && (
-              <div className="bg-terracotta-50 border border-terracotta-300 rounded-2xl p-4 text-xs text-terracotta-900 flex items-center gap-3">
-                <AlertCircle className="w-5 h-5 text-terracotta-700 shrink-0" />
-                <span>{errorMsg}</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-medium text-earth-700 block mb-1">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. Amanda Rivers"
-                    className="w-full bg-sand-100 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600 transition"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-earth-700 block mb-1">
-                    Your Email *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="amanda@example.com"
-                    className="w-full bg-sand-100 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600 transition"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-medium text-earth-700 block mb-1">
-                    Phone Number (Optional)
-                  </label>
-                  <input
-                    type="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full bg-sand-100 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600 transition"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-xs font-medium text-earth-700 block mb-1">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    placeholder="e.g. Online session question, Academy question"
-                    className="w-full bg-sand-100 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600 transition"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-earth-700 block mb-1">
-                  Message *
-                </label>
-                <textarea
-                  rows={5}
-                  required
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="How can we support your wellness or coaching journey?"
-                  className="w-full bg-sand-100 border border-sand-300 rounded-xl p-3.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600 transition resize-none"
-                />
-              </div>
-
+            <div className="pt-4">
               <button
-                type="submit"
-                disabled={submitting}
-                className="w-full py-3.5 rounded-full bg-sage-700 hover:bg-sage-800 text-white font-medium text-xs uppercase tracking-wider transition shadow-sm disabled:opacity-50 flex items-center justify-center gap-2"
+                onClick={() => setSubmitted(false)}
+                className="text-xs text-sage-800 font-medium hover:underline"
               >
-                <Send className="w-4 h-4" />
-                <span>{submitting ? 'Dispatching Message...' : 'Send Message'}</span>
+                إرسال طلب آخر
               </button>
-            </form>
+            </div>
           </div>
+        ) : (
+          <div className="bg-white border border-sand-200 rounded-3xl p-6 sm:p-10 shadow-sm">
+            {tab === 'individual' ? (
+              /* INDIVIDUAL FORM */
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold block mb-1">
+                    المسار الأول — للأفراد
+                  </span>
+                  <h2 className="font-serif text-2xl text-earth-950 font-normal">
+                    المكالمة الاستكشافية المجانية (45 دقيقة)
+                  </h2>
+                  <p className="text-xs text-earth-600 font-light mt-1">
+                    مساحة لفهم احتياجاتِك، ومناقشة مدى ملاءمة برنامج «العودة إلى الذات» أو أي خطوة تعليمية،
+                    من غير التزام بالتسجيل.
+                  </p>
+                </div>
 
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">الاسم الأول *</label>
+                      <input
+                        type="text"
+                        required
+                        value={indName}
+                        onChange={e => setIndName(e.target.value)}
+                        placeholder="اسمكِ الكريم"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">البريد الإلكتروني *</label>
+                      <input
+                        type="email"
+                        required
+                        value={indEmail}
+                        onChange={e => setIndEmail(e.target.value)}
+                        placeholder="yourname@example.com"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">رقم الهاتف (اختياري)</label>
+                      <input
+                        type="tel"
+                        value={indPhone}
+                        onChange={e => setIndPhone(e.target.value)}
+                        placeholder="+971 50 000 0000"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">الموضوع الأقرب لاهتمامكِ</label>
+                      <select
+                        value={indTopic}
+                        onChange={e => setIndTopic(e.target.value)}
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      >
+                        <option value="العودة إلى الذات">برنامج العودة إلى الذات</option>
+                        <option value="جلسات فردية">جلسات كوتشينغ فردية</option>
+                        <option value="استفسار عام عن الملاءمة">استفسار عام عن الملاءمة</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-medium text-earth-700 block mb-1">اختاري الموعد المناسب *</label>
+                    <input
+                      type="datetime-local"
+                      required
+                      value={indDate}
+                      onChange={e => setIndDate(e.target.value)}
+                      className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-medium text-earth-700 block mb-1">ملاحظة مختصرة (اختياري)</label>
+                    <textarea
+                      rows={3}
+                      value={indNote}
+                      onChange={e => setIndNote(e.target.value)}
+                      placeholder="ما الذي تتطلعين إلى تحسينه أو تغييره؟"
+                      className="w-full bg-sand-50 border border-sand-300 rounded-xl p-3 text-xs text-earth-900 focus:outline-none focus:border-sage-600 resize-none"
+                    />
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t border-sand-100">
+                    <label className="flex items-start gap-2 text-xs text-earth-700 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={indConsent}
+                        onChange={e => setIndConsent(e.target.checked)}
+                        className="mt-0.5 rounded text-sage-700 focus:ring-sage-600"
+                      />
+                      <span>أوافق على سياسة الخصوصية واستخدام بياناتي لغرض معالجة الطلب والتواصل بشأنه. *</span>
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 rounded-full bg-sage-700 hover:bg-sage-800 text-white font-medium text-xs uppercase tracking-wider transition shadow-sm flex items-center justify-center gap-2"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>تأكيد حجز المكالمة الاستكشافية (45 دقيقة)</span>
+                  </button>
+                  <p className="text-[11px] text-earth-500 font-light text-center">
+                    المكالمة للتعارف والاستكشاف، وليست جلسة علاج نفسي أو استشارة طبية.
+                  </p>
+                </form>
+              </div>
+            ) : (
+              /* CORPORATE FORM */
+              <div className="space-y-6">
+                <div>
+                  <span className="text-xs uppercase tracking-widest text-sage-700 font-semibold block mb-1">
+                    المسار الثاني — للمؤسسات
+                  </span>
+                  <h2 className="font-serif text-2xl text-earth-950 font-normal">
+                    طلب تعاون تدريبي
+                  </h2>
+                  <p className="text-xs text-earth-600 font-light mt-1">
+                    نصمم برامج تدريبية وتطويرية تستجيب لاحتياجات فريقكم في القيادة والمرونة والتواصل والتحسين المستمر.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">اسم المؤسسة والقطاع *</label>
+                      <input
+                        type="text"
+                        required
+                        value={corpOrg}
+                        onChange={e => setCorpOrg(e.target.value)}
+                        placeholder="اسم الجهة أو الشركة"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">اسم مسؤول التواصل والمسمى *</label>
+                      <input
+                        type="text"
+                        required
+                        value={corpContact}
+                        onChange={e => setCorpContact(e.target.value)}
+                        placeholder="الاسم والمسمى الوظيفي"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">البريد الإلكتروني المهني *</label>
+                      <input
+                        type="email"
+                        required
+                        value={corpEmail}
+                        onChange={e => setCorpEmail(e.target.value)}
+                        placeholder="name@company.com"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">رقم الهاتف *</label>
+                      <input
+                        type="tel"
+                        required
+                        value={corpPhone}
+                        onChange={e => setCorpPhone(e.target.value)}
+                        placeholder="+971 4 000 0000"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">مجال التدريب المطلوب *</label>
+                      <select
+                        value={corpTopic}
+                        onChange={e => setCorpTopic(e.target.value)}
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      >
+                        <option value="القيادة والمرونة المهنية">القيادة والمرونة المهنية</option>
+                        <option value="تدريب المدربين والتواصل المؤثر">تدريب المدربين والتواصل المؤثر</option>
+                        <option value="التميز والتحسين المستمر Kaizen">التميز والتحسين المستمر Kaizen</option>
+                        <option value="تصميم ورشة مخصصة">تصميم ورشة مخصصة</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-earth-700 block mb-1">العدد التقريبي للمشاركين</label>
+                      <input
+                        type="text"
+                        value={corpAudienceCount}
+                        onChange={e => setCorpAudienceCount(e.target.value)}
+                        placeholder="مثال: 15–20 مشارك"
+                        className="w-full bg-sand-50 border border-sand-300 rounded-xl px-4 py-2.5 text-xs text-earth-900 focus:outline-none focus:border-sage-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-medium text-earth-700 block mb-1">الهدف أو التحدي التدريبي *</label>
+                    <textarea
+                      rows={3}
+                      required
+                      value={corpGoals}
+                      onChange={e => setCorpGoals(e.target.value)}
+                      placeholder="صفوا باختصار التحدي التدريبي أو المهارات المستهدفة..."
+                      className="w-full bg-sand-50 border border-sand-300 rounded-xl p-3 text-xs text-earth-900 focus:outline-none focus:border-sage-600 resize-none"
+                    />
+                  </div>
+
+                  <div className="space-y-2 pt-2 border-t border-sand-100">
+                    <label className="flex items-start gap-2 text-xs text-earth-700 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={corpConsent}
+                        onChange={e => setCorpConsent(e.target.checked)}
+                        className="mt-0.5 rounded text-sage-700 focus:ring-sage-600"
+                      />
+                      <span>أوافق على سياسة الخصوصية واستخدام البيانات للتواصل بشأن المقترح التدريبي. *</span>
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 rounded-full bg-sage-700 hover:bg-sage-800 text-white font-medium text-xs uppercase tracking-wider transition shadow-sm flex items-center justify-center gap-2"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>إرسال طلب مقترح التدريب</span>
+                  </button>
+                  <p className="text-[11px] text-earth-500 font-light text-center">
+                    إرسال الطلب لا يشكّل التزاماً بالتعاقد؛ سنراجع التفاصيل ونتواصل لمناقشة النطاق والتكلفة.
+                  </p>
+                </form>
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+
+      {/* Alternative Options */}
+      <section className="max-w-3xl mx-auto px-4 pb-20 text-center space-y-4">
+        <div className="bg-sand-100/70 border border-sand-200 rounded-2xl p-6">
+          <h4 className="font-serif text-lg text-earth-900 mb-2">تفضّلين البداية دون حجز؟</h4>
+          <p className="text-xs sm:text-sm text-earth-600 font-light max-w-md mx-auto mb-4">
+            إذا كنتِ في مرحلة الاستكشاف، يمكنِك البدء بالدليل المجاني وقراءة موضوعات الوعي والقيادة الذاتية.
+          </p>
+          <div className="flex gap-4 justify-center">
+            <Link href="/insights" className="text-xs font-semibold text-sage-800 hover:underline">
+              مكتبة المعرفة &larr;
+            </Link>
+          </div>
         </div>
       </section>
     </div>

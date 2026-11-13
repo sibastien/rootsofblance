@@ -145,11 +145,11 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       tagline: 'جذور التوازن • Roots of Balance',
-      headline: 'رحلتكِ نحو التوازن تبدأ من الداخل',
+      headline: 'التوسع يبدأ من الداخل... والأثر يظهر في الحياة والعمل',
       subtext:
-        'مساحة لاكتشاف الذات، وفهم أعمق للعلاقة بين العقل والجسد والروح، واستكشاف طرق أكثر وعياً للعيش بتوازن وانسجام.',
-      cta: 'اكتشفي عالم التوازن',
-      scrollHint: 'تابعي القراءة لاكتشاف أبعاد الشفاء الشمولي',
+        'في جذور التوازن، نربط الوعي بالذات بالمهارات العملية؛ لنساند األفراد في بناء اختيارات أكثر اتزاناً، وندعم المؤسسات في تطوير القيادة والتواصل والمرونة المهنية.',
+      cta: 'حمّلي الدليل المجاني',
+      scrollHint: 'تابعي القراءة لاكتشاف مسارات جذور التوازن',
     },
     whatIsHolistic: {
       badge: 'المدخل إلى الشفاء الشمولي',
@@ -352,11 +352,11 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       tagline: 'Roots of Balance • جذور التوازن',
-      headline: 'Your Journey Toward Balance Begins Within',
+      headline: 'Expansion Begins Within... and Impact Shows in Life & Work',
       subtext:
-        'A sanctuary for self-discovery, a deeper understanding of the mind, body, and soul connection, and exploring conscious pathways to living in balance and harmony.',
-      cta: 'Discover the World of Balance',
-      scrollHint: 'Scroll to explore the dimensions of holistic wellbeing',
+        'At Roots of Balance, we connect self-awareness with practical skills to support individuals in making grounded choices, and empower organizations in leadership, communication, and professional resilience.',
+      cta: 'Download Free Guide',
+      scrollHint: 'Scroll to explore the paths of Roots of Balance',
     },
     whatIsHolistic: {
       badge: 'Gateway to Wholeness',
