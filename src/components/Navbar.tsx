@@ -47,12 +47,12 @@ export default function Navbar() {
     <nav className="bg-[#FAF8F5]/92 backdrop-blur-md border-b border-sand-300/70 sticky top-0 z-50 transition-all duration-300 shadow-[0_2px_15px_rgba(34,31,26,0.02)]">
       {/* Editorial Announcement Banner */}
       <div className="bg-[#1C2C23] text-sand-100 px-4 py-2 text-center text-xs tracking-wide font-light flex items-center justify-center gap-2">
-        <Sparkles className="w-3.5 h-3.5 text-sage-300 shrink-0" />
+        <Sparkles className="w-3.5 h-3.5 text-sun-400 shrink-0" />
         <span className="opacity-90">{lang === 'ar' ? 'التوسع يبدأ من الداخل... والأثر يظهر في الحياة والعمل' : 'Expansion begins from within... and the impact shows in life and work'}</span>
         <span className="hidden md:inline opacity-40">|</span>
         <Link
           href="/return-to-self"
-          className="hidden md:inline underline underline-offset-4 text-sand-200 hover:text-white transition font-normal"
+          className="hidden md:inline underline underline-offset-4 text-sun-300 hover:text-sun-200 transition font-medium"
         >
           {lang === 'ar' ? 'اكتشفي برنامج العودة إلى الذات' : 'Discover Return to Self Program'} &rarr;
         </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
             {/* Subtle Editorial Exploration CTA (Non-Sales) */}
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-sage-800 hover:bg-sage-900 text-sand-50 text-xs font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-sun-600 hover:bg-sun-700 text-white text-xs font-medium tracking-wide transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
             >
               <BookOpen className="w-3.5 h-3.5" />
               <span>{lang === 'ar' ? 'حمّلي الدليل المجاني' : 'Download Free Guide'}</span>

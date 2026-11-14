@@ -135,9 +135,9 @@ export default function ReturnToSelfPage() {
               learn: "دمج المهارات في قرارات يومية، ومراجعة التعثر وبناء خطة للاستمرارية."
             }
           ].map((stage) => (
-            <div key={stage.num} className="bg-white border border-sand-200 rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-start">
+            <div key={stage.num} className="bg-white border border-sand-200 hover:border-sun-300 transition-colors rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-start shadow-sm">
               <div className="flex items-center gap-4 md:w-1/3">
-                <span className="font-serif text-3xl text-sage-700">{stage.num}</span>
+                <span className="font-serif text-3xl text-sun-600 bg-sun-50 w-12 h-12 rounded-xl flex items-center justify-center font-medium">{stage.num}</span>
                 <div>
                   <h3 className="font-serif text-lg text-earth-900">{stage.title}</h3>
                   <span className="text-xs text-sage-700 font-medium">{stage.question}</span>

@@ -78,6 +78,10 @@ export default function Interactive3DSeal() {
     dirLight.position.set(3, 4, 5);
     scene.add(dirLight);
 
+    const sunOrangeLight = new THREE.PointLight(0xF97316, 2.2, 10);
+    sunOrangeLight.position.set(2, -3, 3);
+    scene.add(sunOrangeLight);
+
     const backLight = new THREE.PointLight(0x6F9B87, 1.5, 10);
     backLight.position.set(-3, -2, -2);
     scene.add(backLight);
@@ -145,3 +149,4 @@ export default function Interactive3DSeal() {
     />
   );
 }
+
